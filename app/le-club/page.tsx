@@ -63,10 +63,10 @@ export default async function LeClubPage() {
       {/* Mot du Président */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <ScrollReveal>
               <SectionEyebrow label="Mot du Président" />
-              <h2 className="font-[family-name:var(--font-bebas)] text-5xl tracking-[0.04em] text-[#f8f6f2] mb-6">
+              <h2 className="font-[family-name:var(--font-bebas)] text-4xl md:text-5xl tracking-[0.04em] text-[#f8f6f2] mb-6">
                 Yassine Bouassria
               </h2>
               <blockquote className="border-l-2 border-[#e8d5a3] pl-6 text-[#8a96b8] leading-relaxed italic space-y-4">

@@ -31,9 +31,9 @@ export default async function NosEquipesPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
         {teams.map((team, i) => (
           <ScrollReveal key={team.id} delay={0.1}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
               {/* Info */}
-              <div className={i % 2 === 1 ? 'lg:order-2' : ''}>
+              <div className={i % 2 === 1 ? 'md:order-2' : ''}>
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#e8d5a3] mb-2">{team.tranche_age}</p>
                 <h2 className="font-[family-name:var(--font-bebas)] text-5xl sm:text-6xl tracking-[0.04em] text-[#f8f6f2] mb-4">
                   {team.categorie}
@@ -62,7 +62,7 @@ export default async function NosEquipesPage() {
               </div>
 
               {/* Image */}
-              <div className={i % 2 === 1 ? 'lg:order-1' : ''}>
+              <div className={i % 2 === 1 ? 'md:order-1' : ''}>
                 <div className="relative aspect-[4/3] rounded-[10px] overflow-hidden border border-[rgba(232,213,163,0.08)]">
                   {team.image_url && (
                     <Image
