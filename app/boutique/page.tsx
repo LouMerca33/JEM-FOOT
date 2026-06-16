@@ -22,19 +22,34 @@ export default function BoutiquePage() {
     <div className="bg-[#0d1429] min-h-screen">
 
       {/* Hero */}
-      <div className="bg-[#141d3f] py-24 md:py-32 relative overflow-hidden">
+      <div className="bg-[#0d1429] py-24 md:py-36 relative overflow-hidden min-h-[500px] flex items-center">
+        {/* Diagonale bordeaux */}
+        <div
+          className="absolute inset-0 opacity-30 pointer-events-none"
+          style={{ background: 'linear-gradient(135deg, transparent 55%, #7a1f3d 55%)' }}
+        />
         <div className="absolute inset-0 pitch-bg" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-            {/* Texte gauche */}
-            <ScrollReveal>
+        {/* Badge en grand — déborde à droite */}
+        <div className="absolute right-[-60px] md:right-[-20px] top-1/2 -translate-y-1/2 w-[340px] h-[340px] sm:w-[420px] sm:h-[420px] md:w-[500px] md:h-[500px] drop-shadow-2xl">
+          <Image
+            src="https://res.cloudinary.com/drwj4qlnu/image/upload/jem-foot/logo/jem.png"
+            alt="Logo J.E.M"
+            fill
+            className="object-contain"
+            unoptimized
+          />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <ScrollReveal>
+            <div className="max-w-lg">
               <SectionEyebrow label="Équipement officiel" />
-              <h1 className="font-[family-name:var(--font-bebas)] text-6xl sm:text-7xl md:text-8xl tracking-[0.04em] text-[#f8f6f2] mb-4">
-                La Boutique
+              <h1 className="font-[family-name:var(--font-bebas)] text-7xl sm:text-8xl md:text-9xl tracking-[0.04em] text-[#f8f6f2] leading-none mb-6">
+                La<br />Boutique
               </h1>
-              <p className="text-[#8a96b8] text-lg max-w-md mb-10">
-                Retrouvez tous les équipements et articles aux couleurs du J.E.M sur notre boutique officielle Macron.
+              <p className="text-[#8a96b8] text-base sm:text-lg max-w-sm mb-10">
+                Commandez en ligne les équipements officiels du J.E.M — maillots, sacs et accessoires aux couleurs du club.
               </p>
               <a
                 href={SHOP_URL}
@@ -44,24 +59,8 @@ export default function BoutiquePage() {
               >
                 Accéder à la boutique →
               </a>
-            </ScrollReveal>
-
-            {/* Logo droite — au premier plan */}
-            <ScrollReveal delay={0.15}>
-              <div className="flex items-center justify-center">
-                <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full border-2 border-[rgba(232,213,163,0.25)] shadow-[0_0_100px_rgba(232,213,163,0.1)]">
-                  <Image
-                    src="https://res.cloudinary.com/drwj4qlnu/image/upload/jem-foot/logo/jem.png"
-                    alt="Logo J.E.M"
-                    fill
-                    className="object-contain p-6"
-                    unoptimized
-                  />
-                </div>
-              </div>
-            </ScrollReveal>
-
-          </div>
+            </div>
+          </ScrollReveal>
         </div>
       </div>
 
