@@ -9,25 +9,25 @@ const teams = [
     categorie: 'U7/U8',
     tranche_age: '5–7 ans',
     horaires: 'Lundi 17h45–19h30\nMercredi 14h15–16h00',
-    image_url: 'https://jem-foot.fr/wp-content/uploads/2025/12/U7-edited.jpeg',
+    image_url: 'https://res.cloudinary.com/drwj4qlnu/image/upload/v1781613972/jem-foot/equipes/U7-edited.jpg',
   },
   {
     categorie: 'U9',
     tranche_age: '8–9 ans',
     horaires: 'Mardi & Jeudi\n17h45–19h30',
-    image_url: 'https://jem-foot.fr/wp-content/uploads/2025/12/U8-U9.jpeg',
+    image_url: 'https://res.cloudinary.com/drwj4qlnu/image/upload/v1781613976/jem-foot/equipes/U8-U9.jpg',
   },
   {
     categorie: 'U10/U11',
     tranche_age: '10–11 ans',
     horaires: 'Mardi & Jeudi\n17h45–19h30',
-    image_url: 'https://jem-foot.fr/wp-content/uploads/2025/12/U10-PRIME.jpeg',
+    image_url: 'https://res.cloudinary.com/drwj4qlnu/image/upload/v1781613978/jem-foot/equipes/U10-PRIME.jpg',
   },
   {
     categorie: 'U12/U13',
     tranche_age: '12–13 ans',
     horaires: 'Lundi 18h00–19h30\nMercredi 16h00–18h00',
-    image_url: 'https://jem-foot.fr/wp-content/uploads/2025/12/U13-MATCH-11.jpeg',
+    image_url: 'https://res.cloudinary.com/drwj4qlnu/image/upload/v1781613981/jem-foot/equipes/U13-MATCH-11.jpg',
   },
 ];
 

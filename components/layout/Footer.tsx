@@ -22,7 +22,7 @@ export default function Footer() {
             <Link href="/" className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 rounded-full border-2 border-[#e8d5a3] overflow-hidden">
                 <Image
-                  src="https://jem-foot.fr/wp-content/uploads/2025/12/jem.png"
+                  src="https://res.cloudinary.com/drwj4qlnu/image/upload/v1781614003/jem-foot/logo/jem.png"
                   alt="Logo JEM"
                   width={48}
                   height={48}

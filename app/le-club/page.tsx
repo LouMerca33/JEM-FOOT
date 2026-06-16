@@ -84,7 +84,7 @@ export default async function LeClubPage() {
             <ScrollReveal delay={0.2}>
               <div className="relative rounded-[10px] overflow-hidden aspect-[3/4] max-w-sm mx-auto lg:mx-0 border border-[rgba(232,213,163,0.1)]">
                 <Image
-                  src="https://jem-foot.fr/wp-content/uploads/2025/12/Yassine.jpg"
+                  src="https://res.cloudinary.com/drwj4qlnu/image/upload/v1781614000/jem-foot/misc/Yassine.jpg"
                   alt="Yassine Bouassria, Président du J.E.M"
                   fill
                   className="object-cover object-top"

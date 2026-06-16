@@ -55,7 +55,7 @@ export default function HeroVideo() {
           className="w-24 h-24 mx-auto mb-8 rounded-full border-2 border-[#e8d5a3] overflow-hidden"
         >
           <Image
-            src="https://jem-foot.fr/wp-content/uploads/2025/12/jem.png"
+            src="https://res.cloudinary.com/drwj4qlnu/image/upload/v1781614003/jem-foot/logo/jem.png"
             alt="Logo J.E.M"
             width={96}
             height={96}

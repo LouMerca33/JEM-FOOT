@@ -39,7 +39,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded-full border-2 border-[#e8d5a3] overflow-hidden">
             <Image
-              src="https://jem-foot.fr/wp-content/uploads/2025/12/jem.png"
+              src="https://res.cloudinary.com/drwj4qlnu/image/upload/v1781614003/jem-foot/logo/jem.png"
               alt="Logo JEM"
               width={40}
               height={40}

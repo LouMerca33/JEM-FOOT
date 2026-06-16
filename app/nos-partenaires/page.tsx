@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 };
 
 const fallback: Partenaire[] = [
-  { id: '1', nom: 'MercadierLab', logo_url: 'https://jem-foot.fr/wp-content/uploads/2026/01/MercadierLab-LOGO.png', site_url: null, niveau: 'gold', ordre: 1, actif: true },
-  { id: '2', nom: 'JSA CPA', logo_url: 'https://jem-foot.fr/wp-content/uploads/2026/01/JSA-CPA.png', site_url: null, niveau: 'standard', ordre: 2, actif: true },
-  { id: '3', nom: 'SPUC', logo_url: 'https://jem-foot.fr/wp-content/uploads/2026/01/SPUC.png', site_url: null, niveau: 'standard', ordre: 3, actif: true },
+  { id: '1', nom: 'MercadierLab', logo_url: 'https://res.cloudinary.com/drwj4qlnu/image/upload/v1781613984/jem-foot/partenaires/MercadierLab-LOGO.png', site_url: null, niveau: 'gold', ordre: 1, actif: true },
+  { id: '2', nom: 'JSA CPA', logo_url: 'https://res.cloudinary.com/drwj4qlnu/image/upload/v1781613998/jem-foot/partenaires/JSA-CPA.png', site_url: null, niveau: 'standard', ordre: 2, actif: true },
+  { id: '3', nom: 'SPUC', logo_url: 'https://res.cloudinary.com/drwj4qlnu/image/upload/v1781613999/jem-foot/partenaires/SPUC.png', site_url: null, niveau: 'standard', ordre: 3, actif: true },
 ];
 
 export default async function PartenairesPage() {

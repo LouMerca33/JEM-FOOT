@@ -48,7 +48,7 @@ export default function StadeSection() {
           <ScrollReveal delay={0.2}>
             <div className="relative rounded-[10px] overflow-hidden aspect-[4/3] border border-[rgba(232,213,163,0.1)]">
               <Image
-                src="https://jem-foot.fr/wp-content/uploads/2025/12/Stade-Marie-Houdre.jpg"
+                src="https://res.cloudinary.com/drwj4qlnu/image/upload/v1781614005/jem-foot/stade/Stade-Marie-Houdre.jpg"
                 alt="Stade Marie Houdré"
                 fill
                 className="object-cover"
