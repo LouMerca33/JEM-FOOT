@@ -22,11 +22,6 @@ export const metadata: Metadata = {
   title: "Jeunes Espoirs Mérignacais — Club de Football",
   description:
     "Club de football J.E.M basé à Mérignac (33700). Catégories U7 à U13. Rejoignez-nous !",
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.png",
-  },
   manifest: "/manifest.json",
 };
 
