@@ -1,0 +1,73 @@
+-- Jeunes Espoirs Mérignacais — Schéma Neon PostgreSQL
+-- Exécuter dans l'éditeur SQL de console.neon.tech
+
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+CREATE TABLE IF NOT EXISTS articles (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  titre TEXT NOT NULL,
+  slug TEXT UNIQUE NOT NULL,
+  contenu TEXT,
+  extrait TEXT,
+  image_url TEXT,
+  categorie TEXT CHECK (categorie IN ('Articles Mensuels', 'FAQ', 'Interview')),
+  publie BOOLEAN DEFAULT false NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
+  updated_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS equipes (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  categorie TEXT NOT NULL,
+  tranche_age TEXT,
+  horaires TEXT,
+  effectif INTEGER,
+  image_url TEXT,
+  ordre INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS galerie (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  titre TEXT,
+  image_url TEXT NOT NULL,
+  categorie TEXT CHECK (categorie IN ('Match', 'Entraînement', 'Événement')),
+  equipe TEXT,
+  date_photo DATE,
+  created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS partenaires (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  nom TEXT NOT NULL,
+  logo_url TEXT,
+  site_url TEXT,
+  niveau TEXT DEFAULT 'standard' NOT NULL CHECK (niveau IN ('gold', 'standard')),
+  ordre INTEGER,
+  actif BOOLEAN DEFAULT true NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS resultats (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  equipe TEXT NOT NULL,
+  adversaire TEXT NOT NULL,
+  score_jem INTEGER,
+  score_adversaire INTEGER,
+  date_match DATE,
+  lieu TEXT CHECK (lieu IN ('Domicile', 'Extérieur')),
+  type TEXT DEFAULT 'match' NOT NULL CHECK (type IN ('match', 'plateau', 'tournoi'))
+);
+
+-- Seed équipes
+INSERT INTO equipes (categorie, tranche_age, horaires, effectif, ordre) VALUES
+  ('U7/U8',   '5–7 ans',   'Lundi 17h45–19h30 / Mercredi 14h15–16h00', 20, 1),
+  ('U9',      '8–9 ans',   'Mardi & Jeudi 17h45–19h30',                  18, 2),
+  ('U10/U11', '10–11 ans', 'Mardi & Jeudi 17h45–19h30',                  22, 3),
+  ('U12/U13', '12–13 ans', 'Lundi 18h00–19h30 / Mercredi 16h00–18h00',  25, 4)
+ON CONFLICT DO NOTHING;
+
+-- Seed partenaires
+INSERT INTO partenaires (nom, logo_url, site_url, niveau, ordre) VALUES
+  ('MercadierLab', 'https://jem-foot.fr/wp-content/uploads/2026/01/MercadierLab-LOGO.png', NULL, 'gold', 1),
+  ('JSA CPA',      'https://jem-foot.fr/wp-content/uploads/2026/01/JSA-CPA.png',            NULL, 'standard', 2),
+  ('SPUC',         'https://jem-foot.fr/wp-content/uploads/2026/01/SPUC.png',               NULL, 'standard', 3)
+ON CONFLICT DO NOTHING;

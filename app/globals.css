@@ -1,26 +1,98 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy-deep: #0d1429;
+  --color-navy: #141d3f;
+  --color-navy-mid: #1e2c56;
+  --color-navy-light: #2a3d6e;
+  --color-burgundy: #7a1f3d;
+  --color-burgundy-light: #9c2b4f;
+  --color-cream: #e8d5a3;
+  --color-cream-light: #f2e8c6;
+  --color-cream-dark: #c9b47a;
+  --color-white-jem: #f8f6f2;
+  --color-gray-jem: #8a96b8;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --navy-deep:    #0d1429;
+  --navy:         #141d3f;
+  --navy-mid:     #1e2c56;
+  --navy-light:   #2a3d6e;
+  --burgundy:     #7a1f3d;
+  --burgundy-light:#9c2b4f;
+  --cream:        #e8d5a3;
+  --cream-light:  #f2e8c6;
+  --cream-dark:   #c9b47a;
+  --white:        #f8f6f2;
+  --gray:         #8a96b8;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--navy-deep);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* Rayures gazon football — remplace le quadrillage générique */
+.pitch-bg {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 52px,
+    rgba(255, 255, 255, 0.012) 52px,
+    rgba(255, 255, 255, 0.012) 104px
+  );
+}
+
+/* Fallback CSS reveal (framer-motion prend le relais en client) */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  animation: slideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Shimmer — highlight qui traverse un élément (hover sur cards) */
+@keyframes shimmer {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(232,213,163,0.08) 50%, transparent 100%);
+  animation: shimmer 0.7s ease-out forwards;
+}
+
+/* Ligne de terrain animée — décoration section */
+@keyframes pitchLine {
+  from { width: 0; opacity: 0; }
+  to   { width: 100%; opacity: 1; }
+}
+.pitch-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232,213,163,0.3), transparent);
+  animation: pitchLine 0.8s ease-out both;
+}
+
+/* Pulse gold — pour les dots/accents */
+@keyframes pulseGold {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+.pulse-gold {
+  animation: pulseGold 2s ease-in-out infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy-deep); }
+::-webkit-scrollbar-thumb { background: var(--navy-light); border-radius: 3px; }
