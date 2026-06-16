@@ -6,14 +6,14 @@ const categories = ['U7', 'U8', 'U9', 'U10', 'U11', 'U12', 'U13', 'ÉVÉNEMENTS'
 type Categorie = (typeof categories)[number];
 
 const driveLinks: Record<Categorie, string> = {
-  U7: '#',
-  U8: '#',
-  U9: '#',
-  U10: '#',
-  U11: '#',
-  U12: '#',
-  U13: '#',
-  ÉVÉNEMENTS: '#',
+  U7:         'https://drive.google.com/drive/folders/1i4S8vM6mZCQBTrG3Z66Ye7x00i9Q2H8x',
+  U8:         'https://drive.google.com/drive/folders/1gFO1-mKJFb4ILLi17fyoU-nXHj611-uw',
+  U9:         'https://drive.google.com/drive/folders/1s5vyLeyztYFMmi96f70EerT9anJLlw4w',
+  U10:        'https://drive.google.com/drive/folders/1etbvLqXq5E106Tohow9vY4P_OVfNeBqg',
+  U11:        'https://drive.google.com/drive/folders/1IgZFyFLXDLHDflSfoD2vle2JPxBabCbi',
+  U12:        'https://drive.google.com/drive/folders/1orhrWgy9PcxCdwzwQf_Z7ZykDOV7nPsv',
+  U13:        'https://drive.google.com/drive/folders/1dXCgFLxxmxaCguedddPNgyCGE9QsXg_b',
+  ÉVÉNEMENTS: 'https://drive.google.com/drive/folders/1rNQ7sPjD1Bs74sGvQClVtoC_vy-jyhjk',
 };
 
 export default function GalerieGrid() {
