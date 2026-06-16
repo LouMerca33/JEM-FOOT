@@ -118,7 +118,7 @@ export default function BoutiquePage() {
                 Pour toute question concernant les commandes, contactez-nous directement.
               </p>
               <a
-                href="mailto:secretariat.em@gmail.fr"
+                href="mailto:secretariat.jem@gmail.com"
                 className="mt-2 inline-flex items-center gap-2 bg-[#f8f6f2] hover:bg-[#e8d5a3] text-[#7a1f3d] font-semibold px-8 py-4 rounded text-sm transition-colors"
               >
                 Nous contacter →

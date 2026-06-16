@@ -16,7 +16,7 @@ export default function ContactForm() {
     e.preventDefault();
     setStatus('sending');
     // mailto fallback — replace with API route when backend is set up
-    const mailtoLink = `mailto:secretariat.em@gmail.fr?subject=${encodeURIComponent(`[${form.objet}] ${form.nom}`)}&body=${encodeURIComponent(`Nom: ${form.nom}\nEmail: ${form.email}\n\n${form.message}`)}`;
+    const mailtoLink = `mailto:secretariat.jem@gmail.com?subject=${encodeURIComponent(`[${form.objet}] ${form.nom}`)}&body=${encodeURIComponent(`Nom: ${form.nom}\nEmail: ${form.email}\n\n${form.message}`)}`;
     window.location.href = mailtoLink;
     setStatus('sent');
   };

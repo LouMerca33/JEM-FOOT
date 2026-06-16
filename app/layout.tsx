@@ -24,6 +24,8 @@ export const metadata: Metadata = {
     "Club de football J.E.M basé à Mérignac (33700). Catégories U7 à U13. Rejoignez-nous !",
   icons: {
     icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
 };
 

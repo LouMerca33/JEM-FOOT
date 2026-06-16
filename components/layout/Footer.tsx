@@ -107,8 +107,8 @@ export default function Footer() {
               </li>
               <li>
                 <span className="block text-[#f8f6f2] font-medium">Email</span>
-                <a href="mailto:secretariat.em@gmail.fr" className="hover:text-[#e8d5a3] transition-colors">
-                  secretariat.em@gmail.fr
+                <a href="mailto:secretariat.jem@gmail.com" className="hover:text-[#e8d5a3] transition-colors">
+                  secretariat.jem@gmail.com
                 </a>
               </li>
               <li>

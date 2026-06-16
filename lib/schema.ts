@@ -25,6 +25,8 @@ export const equipes = pgTable('equipes', {
   id: uuid('id').defaultRandom().primaryKey(),
   categorie: text('categorie').notNull(),
   tranche_age: text('tranche_age'),
+  coach: text('coach'),
+  description: text('description'),
   horaires: text('horaires'),
   effectif: integer('effectif'),
   image_url: text('image_url'),
