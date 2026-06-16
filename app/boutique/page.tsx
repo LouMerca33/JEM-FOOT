@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import SectionEyebrow from '@/components/ui/SectionEyebrow';
 import ScrollReveal from '@/components/ui/ScrollReveal';
@@ -23,9 +24,17 @@ export default function BoutiquePage() {
       {/* Hero */}
       <div className="bg-[#141d3f] py-36 relative overflow-hidden">
         <div className="absolute inset-0 pitch-bg" />
-        {/* Cercle décoratif */}
-        <div className="absolute -right-24 top-1/2 -translate-y-1/2 w-96 h-96 border border-[rgba(232,213,163,0.06)] rounded-full pointer-events-none" />
-        <div className="absolute -right-12 top-1/2 -translate-y-1/2 w-64 h-64 border border-[rgba(232,213,163,0.04)] rounded-full pointer-events-none" />
+        {/* Logo en grand à droite */}
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 w-[480px] h-[480px] opacity-[0.08] pointer-events-none select-none">
+          <Image
+            src="https://res.cloudinary.com/drwj4qlnu/image/upload/jem-foot/logo/jem.png"
+            alt=""
+            fill
+            className="object-contain"
+            unoptimized
+          />
+        </div>
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 w-[530px] h-[530px] border border-[rgba(232,213,163,0.05)] rounded-full pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
