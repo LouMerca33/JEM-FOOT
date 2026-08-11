@@ -24,7 +24,7 @@ const milestones: { date: string; label: string }[] = [
 const direction = [
   { poste: 'Président', nom: 'Yassine BOUASSRIA' },
   { poste: 'Secrétaire', nom: 'Mari MADI' },
-  { poste: 'Responsable Sponsor et Web', nom: 'Louÿs MERCADIER' },
+  { poste: 'Responsable Technique des Jeunes (RTJ)', nom: 'Louÿs MERCADIER' },
   { poste: 'Responsable Communication', nom: 'Sofiane KAADA' },
 ];
 
