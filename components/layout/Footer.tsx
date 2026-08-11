@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { SAISON_LABEL } from '@/lib/season';
 
 const navLinks = [
   { href: '/le-club', label: 'Le Club' },
@@ -113,7 +114,7 @@ export default function Footer() {
               </li>
               <li>
                 <span className="block text-[#f8f6f2] font-medium">Saison</span>
-                2025–2026
+                {SAISON_LABEL}
               </li>
             </ul>
           </div>

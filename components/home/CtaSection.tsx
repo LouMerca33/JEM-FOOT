@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import { SAISON_LABEL } from '@/lib/season';
 
 export default function CtaSection() {
   return (
@@ -15,7 +16,7 @@ export default function CtaSection() {
       <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
         <ScrollReveal>
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-[rgba(232,213,163,0.8)] mb-4">
-            Saison 2025–2026
+            Saison {SAISON_LABEL}
           </p>
           <h2 className="font-[family-name:var(--font-bebas)] text-5xl sm:text-6xl md:text-7xl tracking-[0.04em] text-[#f8f6f2] mb-6">
             Rejoignez l&apos;Aventure JEM

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { SAISON_LABEL } from '@/lib/season';
 
 export default function HeroVideo() {
   return (
@@ -43,7 +44,7 @@ export default function HeroVideo() {
         >
           <span className="w-2 h-2 rounded-full bg-[#e8d5a3] animate-pulse" />
           <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#e8d5a3]">
-            Saison 2025–2026
+            Saison {SAISON_LABEL}
           </span>
         </motion.div>
 
@@ -129,7 +130,7 @@ export default function HeroVideo() {
       <div className="absolute bottom-8 right-6 hidden sm:block">
         <div className="bg-[rgba(14,20,41,0.7)] border border-[rgba(232,213,163,0.15)] rounded px-3 py-2 text-center">
           <p className="text-xs text-[#8a96b8] uppercase tracking-widest">Saison en cours</p>
-          <p className="font-[family-name:var(--font-bebas)] text-xl tracking-[0.06em] text-[#e8d5a3]">2025–2026</p>
+          <p className="font-[family-name:var(--font-bebas)] text-xl tracking-[0.06em] text-[#e8d5a3]">{SAISON_LABEL}</p>
         </div>
       </div>
     </section>
