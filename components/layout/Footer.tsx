@@ -107,6 +107,11 @@ export default function Footer() {
                 33700 Mérignac
               </li>
               <li>
+                <span className="block text-[#f8f6f2] font-medium">U14 lundi &amp; matchs à 11</span>
+                Stade Noël Berthet<br />
+                Rue d&apos;Eysines, 33700 Mérignac
+              </li>
+              <li>
                 <span className="block text-[#f8f6f2] font-medium">Email</span>
                 <a href="mailto:secretariat.jem@gmail.com" className="hover:text-[#e8d5a3] transition-colors">
                   secretariat.jem@gmail.com

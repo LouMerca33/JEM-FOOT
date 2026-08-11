@@ -58,6 +58,34 @@ export default function StadeSection() {
             </div>
           </ScrollReveal>
         </div>
+
+        {/* Second terrain — U14 lundi & matchs à 11 */}
+        <ScrollReveal delay={0.15}>
+          <div className="mt-8 bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <span className="w-10 h-10 rounded-full bg-[rgba(122,31,61,0.3)] border border-[rgba(232,213,163,0.2)] flex items-center justify-center text-[#e8d5a3] text-lg">
+                ⚽
+              </span>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#e8d5a3]">Terrain complémentaire</p>
+                <p className="font-[family-name:var(--font-bebas)] text-2xl tracking-[0.04em] text-[#f8f6f2]">Stade Noël Berthet</p>
+              </div>
+            </div>
+            <div className="sm:border-l sm:border-[rgba(232,213,163,0.1)] sm:pl-8 flex-1">
+              <p className="text-sm text-[#8a96b8]">
+                Rue d&apos;Eysines, 33700 Mérignac — entraînement <strong className="text-[#c3cbe0]">U14 du lundi</strong> et <strong className="text-[#c3cbe0]">matchs à 11</strong>.
+              </p>
+            </div>
+            <a
+              href="https://maps.google.com/?q=Stade+Noël+Berthet,+Rue+d'Eysines,+33700+Mérignac"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-shrink-0 text-sm font-semibold text-[#e8d5a3] hover:text-[#f2e8c6] transition-colors"
+            >
+              Itinéraire →
+            </a>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

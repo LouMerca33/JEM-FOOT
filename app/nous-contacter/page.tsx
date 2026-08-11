@@ -69,12 +69,20 @@ export default function ContactPage() {
             ))}
 
             {/* Adresse */}
-            <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6">
-              <h3 className="font-[family-name:var(--font-bebas)] text-xl tracking-[0.06em] text-[#e8d5a3] mb-4">
-                Adresse
+            <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6 space-y-4">
+              <h3 className="font-[family-name:var(--font-bebas)] text-xl tracking-[0.06em] text-[#e8d5a3] mb-2">
+                Adresses
               </h3>
-              <p className="text-sm text-[#f8f6f2]">Stade Marie Houdré</p>
-              <p className="text-sm text-[#8a96b8]">2 rue Maréchal Foch, 33700 Mérignac</p>
+              <div>
+                <p className="text-sm text-[#f8f6f2]">Stade Marie Houdré</p>
+                <p className="text-sm text-[#8a96b8]">2 rue Maréchal Foch, 33700 Mérignac</p>
+                <p className="text-xs text-[#8a96b8] mt-1">Entraînements et matchs à domicile (hors U14 lundi)</p>
+              </div>
+              <div className="pt-3 border-t border-[rgba(232,213,163,0.08)]">
+                <p className="text-sm text-[#f8f6f2]">Stade Noël Berthet</p>
+                <p className="text-sm text-[#8a96b8]">Rue d&apos;Eysines, 33700 Mérignac</p>
+                <p className="text-xs text-[#8a96b8] mt-1">Entraînement U14 du lundi &amp; matchs à 11</p>
+              </div>
             </div>
 
             {/* Réseaux */}
