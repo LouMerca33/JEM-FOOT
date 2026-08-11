@@ -16,8 +16,8 @@ export default async function HomePage() {
     <>
       <HeroVideo tagline={settings.hero_tagline} />
       <StatsBar />
-      <StadeSection />
       <NewsSection />
+      <StadeSection />
       <TeamsSection />
       <TemoignagesSection />
       <SondageSection />
