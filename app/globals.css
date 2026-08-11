@@ -125,3 +125,27 @@ body {
   60%  { opacity: 1; transform: scale(1.15) rotate(8deg); }
   100% { opacity: 1; transform: scale(1) rotate(0deg); }
 }
+
+/* Flash d'impact avant la carte victoire */
+@keyframes burstBgFlash {
+  0%   { opacity: 0; }
+  15%  { opacity: 1; }
+  75%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes burstFadeOut {
+  0%, 70% { opacity: 1; }
+  100%    { opacity: 0; }
+}
+
+@keyframes ballImpact {
+  0%   { opacity: 0; transform: scale(0.2) translateY(-40px); }
+  55%  { opacity: 1; transform: scale(1.25) translateY(0); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes sparkOut {
+  0%   { opacity: 1; transform: translate(-50%,-50%) rotate(var(--deg, 0deg)) translateY(-20px) scale(1); }
+  100% { opacity: 0; transform: translate(-50%,-50%) rotate(var(--deg, 0deg)) translateY(-90px) scale(0.4); }
+}
