@@ -80,7 +80,19 @@ export default async function ArticlePage({ params }: Props) {
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {article.contenu ? (
-          <div className="prose prose-invert prose-sm max-w-none text-[#8a96b8] leading-relaxed" dangerouslySetInnerHTML={{ __html: article.contenu }} />
+          <div
+            className="prose prose-invert max-w-none
+              prose-headings:font-[family-name:var(--font-bebas)] prose-headings:tracking-[0.04em] prose-headings:text-[#f8f6f2]
+              prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-4
+              prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3
+              prose-p:text-[#c3cbe0] prose-p:leading-relaxed
+              prose-a:text-[#e8d5a3] prose-a:no-underline hover:prose-a:underline
+              prose-strong:text-[#f8f6f2] prose-strong:font-semibold
+              prose-ul:text-[#c3cbe0] prose-li:marker:text-[#7a1f3d]
+              prose-blockquote:border-l-[#7a1f3d] prose-blockquote:text-[#e8d5a3] prose-blockquote:not-italic
+              prose-img:rounded-[10px] prose-hr:border-[rgba(232,213,163,0.15)]"
+            dangerouslySetInnerHTML={{ __html: article.contenu }}
+          />
         ) : article.extrait ? (
           <p className="text-[#8a96b8] leading-relaxed text-lg">{article.extrait}</p>
         ) : null}
