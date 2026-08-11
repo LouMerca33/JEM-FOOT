@@ -35,6 +35,8 @@ export default function EquipesAdmin({ equipes }: { equipes: Equipe[] }) {
     startTransition(async () => {
       await updateEquipe(id, {
         tranche_age: f.tranche_age ?? '',
+        coach: f.coach ?? '',
+        description: f.description ?? '',
         horaires: f.horaires ?? '',
         effectif: f.effectif,
         image_url: f.image_url ?? '',
@@ -147,6 +149,14 @@ export default function EquipesAdmin({ equipes }: { equipes: Equipe[] }) {
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-widest text-[#e8d5a3] mb-1">Tranche d&apos;âge</label>
                   <input value={f.tranche_age ?? ''} onChange={(e) => handleChange(equipe.id, 'tranche_age', e.target.value)} className={inputCls} />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-[#e8d5a3] mb-1">Coach</label>
+                  <input value={f.coach ?? ''} onChange={(e) => handleChange(equipe.id, 'coach', e.target.value)} className={inputCls} />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-[#e8d5a3] mb-1">Description</label>
+                  <textarea value={f.description ?? ''} onChange={(e) => handleChange(equipe.id, 'description', e.target.value)} rows={2} className={`${inputCls} resize-none`} />
                 </div>
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-widest text-[#e8d5a3] mb-1">Horaires</label>

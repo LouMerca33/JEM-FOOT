@@ -122,12 +122,16 @@ export async function deleteGaleriePhoto(id: string) {
 
 export async function updateEquipe(id: string, data: {
   tranche_age: string;
+  coach: string;
+  description: string;
   horaires: string;
   effectif: number | null;
   image_url: string;
 }) {
   await db.update(schema.equipes).set({
     tranche_age: data.tranche_age || null,
+    coach: data.coach || null,
+    description: data.description || null,
     horaires: data.horaires || null,
     effectif: data.effectif,
     image_url: data.image_url || null,
