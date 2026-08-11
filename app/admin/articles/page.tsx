@@ -29,7 +29,7 @@ export default async function AdminArticlesPage() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-[rgba(232,213,163,0.08)]">
-                {['Titre', 'Catégorie', 'Statut', 'Date', 'Actions'].map((h) => (
+                {['Titre', 'Catégorie', 'Saison', 'Statut', 'Date', 'Actions'].map((h) => (
                   <th key={h} className="text-left px-4 py-3 text-xs font-bold uppercase tracking-widest text-[#8a96b8]">{h}</th>
                 ))}
               </tr>
@@ -42,6 +42,7 @@ export default async function AdminArticlesPage() {
                     <p className="text-xs text-[#8a96b8]">/{a.slug}</p>
                   </td>
                   <td className="px-4 py-3 text-xs text-[#8a96b8]">{a.categorie ?? '—'}</td>
+                  <td className="px-4 py-3 text-xs text-[#8a96b8]">{a.saison ?? '—'}</td>
                   <td className="px-4 py-3">
                     <span className={`text-xs px-2 py-0.5 rounded ${a.publie ? 'bg-green-900/40 text-green-400' : 'bg-[rgba(232,213,163,0.1)] text-[#8a96b8]'}`}>
                       {a.publie ? 'Publié' : 'Brouillon'}

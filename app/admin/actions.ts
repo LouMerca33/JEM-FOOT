@@ -12,6 +12,7 @@ export async function saveArticle(data: {
   titre: string;
   slug: string;
   categorie: ArticleCategorie;
+  saison: string;
   image_url: string;
   extrait: string;
   contenu: string;
@@ -20,6 +21,7 @@ export async function saveArticle(data: {
   const { id, ...fields } = data;
   const payload = {
     ...fields,
+    saison: fields.saison || null,
     image_url: fields.image_url || null,
     extrait: fields.extrait || null,
     contenu: fields.contenu || null,

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import type { Article, ArticleCategorie } from '@/lib/types';
 import Link from 'next/link';
 import { saveArticle } from '../../actions';
+import { SAISON_META } from '@/lib/season';
 
 const categories: ArticleCategorie[] = ['Articles Mensuels', 'FAQ', 'Interview'];
 
@@ -24,6 +25,7 @@ export default function ArticleEditor({ article }: { article: Article | null }) 
     titre: article?.titre ?? '',
     slug: article?.slug ?? '',
     categorie: (article?.categorie as ArticleCategorie) ?? categories[0],
+    saison: article?.saison ?? SAISON_META,
     image_url: article?.image_url ?? '',
     extrait: article?.extrait ?? '',
     contenu: article?.contenu ?? '',
@@ -78,6 +80,11 @@ export default function ArticleEditor({ article }: { article: Article | null }) 
             <select name="categorie" value={form.categorie} onChange={handleChange} className={inputCls}>
               {categories.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
+          </div>
+          <div>
+            <label className={labelCls}>Saison</label>
+            <input name="saison" value={form.saison} onChange={handleChange} placeholder="Ex: 2026-2027" className={inputCls} />
+            <p className="text-xs text-[#8a96b8] mt-1">Utile pour retrouver l&apos;article dans les archives plus tard.</p>
           </div>
           <div>
             <label className={labelCls}>Image à la une (URL)</label>
