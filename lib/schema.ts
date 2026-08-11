@@ -74,6 +74,38 @@ export const resultats = pgTable('resultats', {
   type: text('type').default('match').notNull(),
 });
 
+export const sondages = pgTable('sondages', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  question: text('question').notNull(),
+  actif: boolean('actif').default(true).notNull(),
+  created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+export const sondageOptions = pgTable('sondage_options', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  sondage_id: uuid('sondage_id').notNull().references(() => sondages.id, { onDelete: 'cascade' }),
+  texte: text('texte').notNull(),
+  ordre: integer('ordre').default(0).notNull(),
+});
+
+export const sondageVotes = pgTable('sondage_votes', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  sondage_id: uuid('sondage_id').notNull().references(() => sondages.id, { onDelete: 'cascade' }),
+  option_id: uuid('option_id').notNull().references(() => sondageOptions.id, { onDelete: 'cascade' }),
+  voter_id: text('voter_id').notNull(),
+  created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
+export const temoignages = pgTable('temoignages', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  nom_parent: text('nom_parent').notNull(),
+  categorie_enfant: text('categorie_enfant'),
+  message: text('message').notNull(),
+  ordre: integer('ordre').default(0).notNull(),
+  actif: boolean('actif').default(true).notNull(),
+  created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
 export type Article = typeof articles.$inferSelect;
 export type NewArticle = typeof articles.$inferInsert;
 export type Equipe = typeof equipes.$inferSelect;
@@ -85,3 +117,10 @@ export type NewPartenaire = typeof partenaires.$inferInsert;
 export type Educateur = typeof educateurs.$inferSelect;
 export type NewEducateur = typeof educateurs.$inferInsert;
 export type Resultat = typeof resultats.$inferSelect;
+export type Sondage = typeof sondages.$inferSelect;
+export type NewSondage = typeof sondages.$inferInsert;
+export type SondageOption = typeof sondageOptions.$inferSelect;
+export type NewSondageOption = typeof sondageOptions.$inferInsert;
+export type SondageVote = typeof sondageVotes.$inferSelect;
+export type Temoignage = typeof temoignages.$inferSelect;
+export type NewTemoignage = typeof temoignages.$inferInsert;

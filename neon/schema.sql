@@ -57,6 +57,39 @@ CREATE TABLE IF NOT EXISTS resultats (
   type TEXT DEFAULT 'match' NOT NULL CHECK (type IN ('match', 'plateau', 'tournoi'))
 );
 
+CREATE TABLE IF NOT EXISTS sondages (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  question TEXT NOT NULL,
+  actif BOOLEAN DEFAULT true NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS sondage_options (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  sondage_id UUID NOT NULL REFERENCES sondages(id) ON DELETE CASCADE,
+  texte TEXT NOT NULL,
+  ordre INTEGER DEFAULT 0 NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS sondage_votes (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  sondage_id UUID NOT NULL REFERENCES sondages(id) ON DELETE CASCADE,
+  option_id UUID NOT NULL REFERENCES sondage_options(id) ON DELETE CASCADE,
+  voter_id TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
+  UNIQUE (sondage_id, voter_id)
+);
+
+CREATE TABLE IF NOT EXISTS temoignages (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  nom_parent TEXT NOT NULL,
+  categorie_enfant TEXT,
+  message TEXT NOT NULL,
+  ordre INTEGER DEFAULT 0 NOT NULL,
+  actif BOOLEAN DEFAULT true NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
+);
+
 -- Seed équipes
 INSERT INTO equipes (categorie, tranche_age, horaires, effectif, ordre) VALUES
   ('U7/U8',   '5–7 ans',   'Lundi 17h45–19h30 / Mercredi 14h15–16h00', 20, 1),

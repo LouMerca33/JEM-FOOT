@@ -10,6 +10,8 @@ const navItems = [
   { href: '/admin/equipes', label: 'Équipes', icon: '⊛' },
   { href: '/admin/educateurs', label: 'Éducateurs', icon: '⊙' },
   { href: '/admin/partenaires', label: 'Partenaires', icon: '⊕' },
+  { href: '/admin/sondages', label: 'Sondages', icon: '◈' },
+  { href: '/admin/temoignages', label: 'Témoignages', icon: '❝' },
 ];
 
 export default function AdminSidebar() {

@@ -11,6 +11,13 @@ export type {
   Partenaire,
   NewPartenaire,
   Resultat,
+  Sondage,
+  NewSondage,
+  SondageOption,
+  NewSondageOption,
+  SondageVote,
+  Temoignage,
+  NewTemoignage,
 } from './schema';
 
 // Helpers de catégories (validation côté UI)

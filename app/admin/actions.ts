@@ -205,3 +205,67 @@ export async function deletePartenaire(id: string) {
   revalidatePath('/admin/partenaires');
   revalidatePath('/nos-partenaires');
 }
+
+// ── Sondages ──────────────────────────────────────────────────────────────────
+
+export async function createSondage(question: string) {
+  const [sondage] = await db.insert(schema.sondages).values({ question, actif: true }).returning();
+  revalidatePath('/admin/sondages');
+  revalidatePath('/');
+  return sondage;
+}
+
+export async function toggleSondage(id: string, actif: boolean) {
+  await db.update(schema.sondages).set({ actif: !actif }).where(eq(schema.sondages.id, id));
+  revalidatePath('/admin/sondages');
+  revalidatePath('/');
+}
+
+export async function deleteSondage(id: string) {
+  await db.delete(schema.sondages).where(eq(schema.sondages.id, id));
+  revalidatePath('/admin/sondages');
+  revalidatePath('/');
+}
+
+export async function addSondageOption(sondageId: string, texte: string, ordre: number) {
+  await db.insert(schema.sondageOptions).values({ sondage_id: sondageId, texte, ordre });
+  revalidatePath('/admin/sondages');
+  revalidatePath('/');
+}
+
+export async function deleteSondageOption(id: string) {
+  await db.delete(schema.sondageOptions).where(eq(schema.sondageOptions.id, id));
+  revalidatePath('/admin/sondages');
+  revalidatePath('/');
+}
+
+// ── Témoignages ───────────────────────────────────────────────────────────────
+
+export async function addTemoignage(data: {
+  nom_parent: string;
+  categorie_enfant: string;
+  message: string;
+  ordre: number;
+}) {
+  await db.insert(schema.temoignages).values({
+    nom_parent: data.nom_parent,
+    categorie_enfant: data.categorie_enfant || null,
+    message: data.message,
+    ordre: data.ordre,
+    actif: true,
+  });
+  revalidatePath('/admin/temoignages');
+  revalidatePath('/');
+}
+
+export async function toggleTemoignage(id: string, actif: boolean) {
+  await db.update(schema.temoignages).set({ actif: !actif }).where(eq(schema.temoignages.id, id));
+  revalidatePath('/admin/temoignages');
+  revalidatePath('/');
+}
+
+export async function deleteTemoignage(id: string) {
+  await db.delete(schema.temoignages).where(eq(schema.temoignages.id, id));
+  revalidatePath('/admin/temoignages');
+  revalidatePath('/');
+}
