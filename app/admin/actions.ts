@@ -305,3 +305,35 @@ export async function saveSettings(data: Record<string, string>) {
   revalidatePath('/admin/accueil');
   revalidatePath('/');
 }
+
+// ── Résultats ────────────────────────────────────────────────────────────────
+
+export async function addResultat(data: {
+  equipe: string;
+  adversaire: string;
+  score_jem: number | null;
+  score_adversaire: number | null;
+  date_match: string; // YYYY-MM-DD
+  lieu: string;
+  type: string;
+}) {
+  await db.insert(schema.resultats).values({
+    equipe: data.equipe,
+    adversaire: data.adversaire,
+    score_jem: data.score_jem,
+    score_adversaire: data.score_adversaire,
+    date_match: data.date_match || null,
+    lieu: data.lieu || null,
+    type: data.type,
+  });
+  revalidatePath('/admin/resultats');
+  revalidatePath('/calendrier-et-resultat');
+  revalidatePath('/');
+}
+
+export async function deleteResultat(id: string) {
+  await db.delete(schema.resultats).where(eq(schema.resultats.id, id));
+  revalidatePath('/admin/resultats');
+  revalidatePath('/calendrier-et-resultat');
+  revalidatePath('/');
+}

@@ -10,6 +10,7 @@ const navItems = [
   { href: '/admin/articles', label: 'Articles', icon: '✎' },
   { href: '/admin/galerie', label: 'Galerie', icon: '⊡' },
   { href: '/admin/equipes', label: 'Équipes', icon: '⊛' },
+  { href: '/admin/resultats', label: 'Résultats', icon: '⚽' },
   { href: '/admin/educateurs', label: 'Éducateurs', icon: '⊙' },
   { href: '/admin/partenaires', label: 'Partenaires', icon: '⊕' },
   { href: '/admin/sondages', label: 'Sondages', icon: '◈' },

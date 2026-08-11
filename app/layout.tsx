@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import NewArticleToast from "@/components/layout/NewArticleToast";
+import VictoryPopup from "@/components/layout/VictoryPopup";
 import { db, schema } from "@/lib/db";
 import { desc } from "drizzle-orm";
 import { articleVisibleWhere } from "@/lib/article-visibility";
@@ -47,6 +48,35 @@ export default async function RootLayout({
     // Table absente ou DB inaccessible : pas de toast, on n'affiche rien.
   }
 
+  let latestVictoire: {
+    id: string;
+    equipe: string;
+    adversaire: string;
+    score_jem: number;
+    score_adversaire: number;
+  } | null = null;
+  try {
+    const recentResultats = await db
+      .select()
+      .from(schema.resultats)
+      .orderBy(desc(schema.resultats.date_match))
+      .limit(5);
+    const win = recentResultats.find(
+      (r) => r.score_jem !== null && r.score_adversaire !== null && r.score_jem > r.score_adversaire
+    );
+    if (win) {
+      latestVictoire = {
+        id: win.id,
+        equipe: win.equipe,
+        adversaire: win.adversaire,
+        score_jem: win.score_jem!,
+        score_adversaire: win.score_adversaire!,
+      };
+    }
+  } catch {
+    // Table absente ou DB inaccessible : pas de popup.
+  }
+
   return (
     <html
       lang="fr"
@@ -58,6 +88,7 @@ export default async function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <NewArticleToast latest={latest} />
+        <VictoryPopup latest={latestVictoire} />
       </body>
     </html>
   );
