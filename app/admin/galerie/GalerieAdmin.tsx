@@ -61,7 +61,7 @@ export default function GalerieAdmin({ photos }: { photos: GaleriePhoto[] }) {
 
   return (
     <div className="space-y-6">
-      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6">
+      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] p-6">
         <h2 className="font-[family-name:var(--font-bebas)] text-2xl text-[#f8f6f2] mb-4">Ajouter des photos</h2>
 
         {/* Catégorie + Équipe d'abord */}

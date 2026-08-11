@@ -2,6 +2,7 @@ import { db, schema } from '@/lib/db';
 import { asc } from 'drizzle-orm';
 import type { Partenaire } from '@/lib/types';
 import PartenairesAdmin from './PartenairesAdmin';
+import { AdminPageHeader } from '@/components/admin/ui';
 
 export default async function AdminPartenairesPage() {
   let partenaires: Partenaire[] = [];
@@ -11,7 +12,7 @@ export default async function AdminPartenairesPage() {
 
   return (
     <div>
-      <h1 className="font-[family-name:var(--font-bebas)] text-4xl tracking-[0.04em] text-[#f8f6f2] mb-8">Partenaires</h1>
+      <AdminPageHeader title="Partenaires" description="Logos et niveaux affichés sur /nos-partenaires." icon="⊕" />
       <PartenairesAdmin partenaires={partenaires} />
     </div>
   );

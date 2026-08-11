@@ -2,6 +2,7 @@ import { db, schema } from '@/lib/db';
 import { asc } from 'drizzle-orm';
 import type { Temoignage } from '@/lib/types';
 import TemoignagesAdmin from './TemoignagesAdmin';
+import { AdminPageHeader } from '@/components/admin/ui';
 
 export default async function AdminTemoignagesPage() {
   let temoignages: Temoignage[] = [];
@@ -11,8 +12,7 @@ export default async function AdminTemoignagesPage() {
 
   return (
     <div>
-      <h1 className="font-[family-name:var(--font-bebas)] text-4xl tracking-[0.04em] text-[#f8f6f2] mb-2">Témoignages</h1>
-      <p className="text-sm text-[#8a96b8] mb-8">Affichés en page d&apos;accueil pour rassurer les nouveaux parents.</p>
+      <AdminPageHeader title="Témoignages" description="Affichés en page d'accueil pour rassurer les nouveaux parents." icon="❝" />
       <TemoignagesAdmin temoignages={temoignages} />
     </div>
   );

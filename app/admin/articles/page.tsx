@@ -1,8 +1,8 @@
 import { db, schema } from '@/lib/db';
 import { desc } from 'drizzle-orm';
 import type { Article } from '@/lib/types';
-import Link from 'next/link';
 import ArticleActions from './ArticleActions';
+import { AdminPageHeader, AdminPrimaryButton, AdminBadge } from '@/components/admin/ui';
 
 function formatDate(d: Date | string) {
   return new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -16,13 +16,13 @@ export default async function AdminArticlesPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="font-[family-name:var(--font-bebas)] text-4xl tracking-[0.04em] text-[#f8f6f2]">Articles</h1>
-        <Link href="/admin/articles/new" className="bg-[#7a1f3d] hover:bg-[#9c2b4f] text-[#f8f6f2] font-semibold px-5 py-2.5 rounded text-sm transition-colors">
-          + Nouvel article
-        </Link>
-      </div>
-      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] overflow-x-auto">
+      <AdminPageHeader
+        title="Articles"
+        description="Actus, FAQ et interviews publiés sur le site."
+        icon="✎"
+        action={<AdminPrimaryButton href="/admin/articles/new">+ Nouvel article</AdminPrimaryButton>}
+      />
+      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] overflow-x-auto">
         {articles.length === 0 ? (
           <p className="p-8 text-sm text-[#8a96b8] text-center">Aucun article.</p>
         ) : (
@@ -44,17 +44,11 @@ export default async function AdminArticlesPage() {
                   <td className="px-4 py-3 text-xs text-[#8a96b8]">{a.categorie ?? '—'}</td>
                   <td className="px-4 py-3 text-xs text-[#8a96b8]">{a.saison ?? '—'}</td>
                   <td className="px-4 py-3">
-                    <span className={`text-xs px-2 py-0.5 rounded ${
-                      a.publie && a.publish_at && new Date(a.publish_at) > new Date()
-                        ? 'bg-[rgba(232,213,163,0.15)] text-[#e8d5a3]'
-                        : a.publie
-                        ? 'bg-green-900/40 text-green-400'
-                        : 'bg-[rgba(232,213,163,0.1)] text-[#8a96b8]'
-                    }`}>
+                    <AdminBadge tone={a.publie && a.publish_at && new Date(a.publish_at) > new Date() ? 'gold' : a.publie ? 'success' : 'neutral'}>
                       {a.publie && a.publish_at && new Date(a.publish_at) > new Date()
                         ? `Programmé · ${new Date(a.publish_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}`
                         : a.publie ? 'Publié' : 'Brouillon'}
-                    </span>
+                    </AdminBadge>
                   </td>
                   <td className="px-4 py-3 text-xs text-[#8a96b8]">{formatDate(a.created_at)}</td>
                   <td className="px-4 py-3"><ArticleActions id={a.id} publie={a.publie} /></td>

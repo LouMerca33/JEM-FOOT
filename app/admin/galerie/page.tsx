@@ -2,6 +2,7 @@ import { db, schema } from '@/lib/db';
 import { desc } from 'drizzle-orm';
 import type { GaleriePhoto } from '@/lib/types';
 import GalerieAdmin from './GalerieAdmin';
+import { AdminPageHeader } from '@/components/admin/ui';
 
 export default async function AdminGaleriePage() {
   let photos: GaleriePhoto[] = [];
@@ -11,7 +12,7 @@ export default async function AdminGaleriePage() {
 
   return (
     <div>
-      <h1 className="font-[family-name:var(--font-bebas)] text-4xl tracking-[0.04em] text-[#f8f6f2] mb-8">Galerie Photos</h1>
+      <AdminPageHeader title="Galerie Photos" description="Les photos affichées sur /galeries-photos, classées par catégorie." icon="⊡" />
       <GalerieAdmin photos={photos} />
     </div>
   );

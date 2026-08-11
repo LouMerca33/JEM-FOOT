@@ -1,6 +1,7 @@
 import { db, schema } from '@/lib/db';
 import { asc, desc, eq, sql } from 'drizzle-orm';
 import SondagesAdmin from './SondagesAdmin';
+import { AdminPageHeader } from '@/components/admin/ui';
 
 export type SondageWithOptions = {
   id: string;
@@ -36,8 +37,7 @@ export default async function AdminSondagesPage() {
 
   return (
     <div>
-      <h1 className="font-[family-name:var(--font-bebas)] text-4xl tracking-[0.04em] text-[#f8f6f2] mb-2">Sondages</h1>
-      <p className="text-sm text-[#8a96b8] mb-8">Un seul sondage actif s&apos;affiche sur la page d&apos;accueil (le plus récent).</p>
+      <AdminPageHeader title="Sondages" description="Un seul sondage actif s'affiche sur la page d'accueil (le plus récent)." icon="◈" />
       <SondagesAdmin sondages={sondages} />
     </div>
   );

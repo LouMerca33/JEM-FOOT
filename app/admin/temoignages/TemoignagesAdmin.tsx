@@ -24,7 +24,7 @@ export default function TemoignagesAdmin({ temoignages }: { temoignages: Temoign
 
   return (
     <div className="space-y-6">
-      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6">
+      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] p-6">
         {!adding ? (
           <button onClick={() => setAdding(true)} className="text-sm text-[#e8d5a3] hover:text-[#f2e8c6] transition-colors">
             + Ajouter un témoignage
@@ -57,7 +57,7 @@ export default function TemoignagesAdmin({ temoignages }: { temoignages: Temoign
         )}
       </div>
 
-      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] overflow-x-auto">
+      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] overflow-x-auto">
         <table className="w-full min-w-[560px]">
           <thead>
             <tr className="border-b border-[rgba(232,213,163,0.08)]">

@@ -38,7 +38,7 @@ export default function SondagesAdmin({ sondages }: { sondages: SondageWithOptio
 
   return (
     <div className="space-y-6">
-      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6">
+      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] p-6">
         {!creating ? (
           <button onClick={() => setCreating(true)} className="text-sm text-[#e8d5a3] hover:text-[#f2e8c6] transition-colors">
             + Créer un sondage
@@ -66,7 +66,7 @@ export default function SondagesAdmin({ sondages }: { sondages: SondageWithOptio
         {sondages.map((s) => {
           const total = s.options.reduce((sum, o) => sum + o.votes, 0);
           return (
-            <div key={s.id} className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6">
+            <div key={s.id} className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] p-6">
               <div className="flex items-start justify-between mb-4 gap-4">
                 <div>
                   <h3 className="font-[family-name:var(--font-bebas)] text-2xl text-[#f8f6f2]">{s.question}</h3>

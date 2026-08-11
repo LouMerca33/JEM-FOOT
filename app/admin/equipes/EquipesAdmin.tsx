@@ -93,7 +93,7 @@ export default function EquipesAdmin({ equipes }: { equipes: Equipe[] }) {
             + Ajouter une équipe
           </button>
         ) : (
-          <div className="bg-[#1e2c56] border border-[#e8d5a3] rounded-[10px] p-6">
+          <div className="bg-[#1e2c56] border border-[#e8d5a3] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] p-6">
             <h2 className="font-[family-name:var(--font-bebas)] text-2xl text-[#f8f6f2] mb-4">Nouvelle équipe</h2>
             <div className="space-y-3">
               <div>
@@ -143,7 +143,7 @@ export default function EquipesAdmin({ equipes }: { equipes: Equipe[] }) {
         {equipes.map((equipe, index) => {
           const f = forms[equipe.id] ?? equipe;
           return (
-            <div key={equipe.id} className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6">
+            <div key={equipe.id} className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <div className="flex flex-col">

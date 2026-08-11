@@ -2,6 +2,7 @@ import { db, schema } from '@/lib/db';
 import { asc } from 'drizzle-orm';
 import type { Equipe } from '@/lib/types';
 import EquipesAdmin from './EquipesAdmin';
+import { AdminPageHeader } from '@/components/admin/ui';
 
 export default async function AdminEquipesPage() {
   let equipes: Equipe[] = [];
@@ -11,7 +12,7 @@ export default async function AdminEquipesPage() {
 
   return (
     <div>
-      <h1 className="font-[family-name:var(--font-bebas)] text-4xl tracking-[0.04em] text-[#f8f6f2] mb-8">Équipes</h1>
+      <AdminPageHeader title="Équipes" description="Catégories, coachs, horaires et photos affichés sur /nos-equipes." icon="⊛" />
       <EquipesAdmin equipes={equipes} />
     </div>
   );

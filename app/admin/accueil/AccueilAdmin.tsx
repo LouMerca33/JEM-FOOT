@@ -25,7 +25,7 @@ export default function AccueilAdmin({ settings }: { settings: Record<SettingKey
 
   return (
     <div className="space-y-6">
-      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6">
+      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] p-6">
         <h2 className="font-[family-name:var(--font-bebas)] text-2xl text-[#f8f6f2] mb-4">Chiffres clés</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {([1, 2, 3, 4] as const).map((n) => (
@@ -53,7 +53,7 @@ export default function AccueilAdmin({ settings }: { settings: Record<SettingKey
         </div>
       </div>
 
-      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6">
+      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] p-6">
         <h2 className="font-[family-name:var(--font-bebas)] text-2xl text-[#f8f6f2] mb-4">Phrase d&apos;accroche</h2>
         <label className="block text-xs font-bold uppercase tracking-widest text-[#e8d5a3] mb-1">Sous-titre de la bannière d&apos;accueil</label>
         <input

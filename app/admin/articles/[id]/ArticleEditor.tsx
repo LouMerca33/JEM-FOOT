@@ -68,7 +68,7 @@ export default function ArticleEditor({ article }: { article: Article | null }) 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div className="lg:col-span-2 space-y-4">
-        <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6 space-y-4">
+        <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] p-6 space-y-4">
           <div>
             <label className={labelCls}>Titre</label>
             <input name="titre" value={form.titre} onChange={handleChange} placeholder="Titre de l'article" className={inputCls} />
@@ -89,7 +89,7 @@ export default function ArticleEditor({ article }: { article: Article | null }) 
       </div>
 
       <div className="space-y-4">
-        <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6 space-y-4">
+        <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] p-6 space-y-4">
           <div>
             <label className={labelCls}>Catégorie</label>
             <select name="categorie" value={form.categorie} onChange={handleChange} className={inputCls}>
@@ -107,7 +107,7 @@ export default function ArticleEditor({ article }: { article: Article | null }) 
           </div>
         </div>
 
-        <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6 space-y-4">
+        <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] p-6 space-y-4">
           <div>
             <label className={labelCls}>Publication différée (optionnel)</label>
             <input
@@ -127,7 +127,7 @@ export default function ArticleEditor({ article }: { article: Article | null }) 
           </div>
         </div>
 
-        <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6 space-y-3">
+        <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] p-6 space-y-3">
           <button onClick={() => handleSave(true)} disabled={pending}
             className="w-full bg-[#7a1f3d] hover:bg-[#9c2b4f] disabled:opacity-50 text-[#f8f6f2] font-semibold py-3 rounded text-sm transition-colors">
             {pending ? 'Sauvegarde...' : isScheduled ? `Programmer pour le ${new Date(form.publish_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })}` : 'Publier'}
