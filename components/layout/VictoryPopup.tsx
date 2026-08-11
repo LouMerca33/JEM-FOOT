@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import dynamic from 'next/dynamic';
+import ScoreCountUp from './ScoreCountUp';
 
 const Fireworks = dynamic(() => import('./Fireworks'), { ssr: false });
 
@@ -43,25 +44,49 @@ export default function VictoryPopup({ latest }: Props) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <Fireworks />
       <div
-        className="absolute inset-0 bg-[#0d1429]/80 backdrop-blur-sm"
+        className="absolute inset-0 bg-[#0d1429]/85 backdrop-blur-sm"
         onClick={dismiss}
         aria-hidden="true"
       />
-      <div className="relative z-10 max-w-sm w-full bg-gradient-to-b from-[#1e2c56] to-[#141d3f] border border-[rgba(232,213,163,0.3)] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5)] p-8 text-center animate-[popIn_0.5s_cubic-bezier(0.34,1.56,0.64,1)_both]">
-        <p className="text-5xl mb-3">🎉</p>
-        <p className="font-[family-name:var(--font-bebas)] text-5xl tracking-[0.06em] text-[#e8d5a3] mb-2">
+
+      {/* Lueur dorée pulsante derrière la carte */}
+      <div
+        className="absolute w-[420px] h-[420px] rounded-full pointer-events-none animate-[glowPulse_2.2s_ease-in-out_infinite]"
+        style={{ background: 'radial-gradient(circle, rgba(232,213,163,0.35) 0%, transparent 70%)' }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 max-w-sm w-full bg-gradient-to-b from-[#1e2c56] to-[#141d3f] border border-[rgba(232,213,163,0.35)] rounded-2xl shadow-[0_20px_70px_rgba(0,0,0,0.55)] p-8 text-center overflow-hidden animate-[popIn_0.55s_cubic-bezier(0.34,1.56,0.64,1)_both]">
+        {/* Balayage brillant */}
+        <div
+          className="absolute inset-0 pointer-events-none animate-[shineSweep_1.4s_ease-out_0.4s_both]"
+          style={{ background: 'linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.16) 50%, transparent 60%)' }}
+          aria-hidden="true"
+        />
+
+        <p className="relative text-5xl mb-3 animate-[bounceIn_0.6s_cubic-bezier(0.34,1.56,0.64,1)_0.15s_both]">🎉</p>
+
+        <p className="relative font-[family-name:var(--font-bebas)] text-5xl tracking-[0.06em] text-[#e8d5a3] mb-2 [text-shadow:0_0_24px_rgba(232,213,163,0.5)] animate-[popIn_0.5s_cubic-bezier(0.34,1.56,0.64,1)_0.3s_both]">
           VICTOIRE !
         </p>
-        <p className="text-sm font-bold uppercase tracking-widest text-[#8a96b8] mb-4">{latest.equipe}</p>
-        <div className="flex items-center justify-center gap-4 mb-6">
-          <span className="font-[family-name:var(--font-bebas)] text-4xl text-[#f8f6f2]">{latest.score_jem}</span>
+        <p className="relative text-sm font-bold uppercase tracking-widest text-[#8a96b8] mb-4 opacity-0 animate-[fadeInUp_0.5s_ease-out_0.45s_forwards]">
+          {latest.equipe}
+        </p>
+        <div className="relative flex items-center justify-center gap-4 mb-6 opacity-0 animate-[fadeInUp_0.5s_ease-out_0.55s_forwards]">
+          <span className="font-[family-name:var(--font-bebas)] text-5xl text-[#f8f6f2] tabular-nums">
+            <ScoreCountUp value={latest.score_jem} delay={650} />
+          </span>
           <span className="text-[#8a96b8] text-sm">–</span>
-          <span className="font-[family-name:var(--font-bebas)] text-4xl text-[#8a96b8]">{latest.score_adversaire}</span>
+          <span className="font-[family-name:var(--font-bebas)] text-5xl text-[#8a96b8] tabular-nums">
+            <ScoreCountUp value={latest.score_adversaire} delay={650} />
+          </span>
         </div>
-        <p className="text-xs text-[#8a96b8] mb-6">contre {latest.adversaire}</p>
+        <p className="relative text-xs text-[#8a96b8] mb-6 opacity-0 animate-[fadeInUp_0.5s_ease-out_0.65s_forwards]">
+          contre {latest.adversaire}
+        </p>
         <button
           onClick={dismiss}
-          className="bg-[#7a1f3d] hover:bg-[#9c2b4f] text-[#f8f6f2] font-semibold px-6 py-2.5 rounded-lg text-sm shadow-[0_2px_10px_rgba(122,31,61,0.4)] transition-colors"
+          className="relative bg-[#7a1f3d] hover:bg-[#9c2b4f] text-[#f8f6f2] font-semibold px-6 py-2.5 rounded-lg text-sm shadow-[0_2px_10px_rgba(122,31,61,0.4)] transition-colors opacity-0 animate-[fadeInUp_0.5s_ease-out_0.8s_forwards]"
         >
           Bravo les jeunes !
         </button>
