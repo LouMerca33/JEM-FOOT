@@ -17,6 +17,7 @@ export async function saveArticle(data: {
   extrait: string;
   contenu: string;
   publie: boolean;
+  publish_at: string; // ISO string, vide = publication immédiate
 }) {
   const { id, ...fields } = data;
   const payload = {
@@ -25,6 +26,7 @@ export async function saveArticle(data: {
     image_url: fields.image_url || null,
     extrait: fields.extrait || null,
     contenu: fields.contenu || null,
+    publish_at: fields.publish_at ? new Date(fields.publish_at) : null,
     updated_at: new Date(),
   };
 

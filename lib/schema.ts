@@ -18,6 +18,7 @@ export const articles = pgTable('articles', {
   categorie: text('categorie'),
   saison: text('saison'),
   publie: boolean('publie').default(false).notNull(),
+  publish_at: timestamp('publish_at', { withTimezone: true }),
   created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updated_at: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
 });

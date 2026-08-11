@@ -1,11 +1,12 @@
 import { db, schema } from '@/lib/db';
-import { desc, eq } from 'drizzle-orm';
+import { desc } from 'drizzle-orm';
 import type { Article } from '@/lib/types';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import SectionEyebrow from '@/components/ui/SectionEyebrow';
 import { SAISON_META } from '@/lib/season';
+import { articleVisibleWhere } from '@/lib/article-visibility';
 
 export const metadata: Metadata = {
   title: 'Actualités — J.E.M Mérignac',
@@ -48,7 +49,7 @@ export default async function ActualitePage({
     all = await db
       .select()
       .from(schema.articles)
-      .where(eq(schema.articles.publie, true))
+      .where(articleVisibleWhere)
       .orderBy(desc(schema.articles.created_at));
   } catch {}
 

@@ -1,10 +1,11 @@
 import { db, schema } from '@/lib/db';
-import { desc, eq } from 'drizzle-orm';
+import { desc } from 'drizzle-orm';
 import type { Article } from '@/lib/types';
 import Link from 'next/link';
 import Image from 'next/image';
 import SectionEyebrow from '@/components/ui/SectionEyebrow';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import { articleVisibleWhere } from '@/lib/article-visibility';
 
 function formatDate(dateStr: string | Date) {
   return new Date(dateStr).toLocaleDateString('fr-FR', {
@@ -23,6 +24,7 @@ const placeholders: Article[] = [
     image_url: 'https://res.cloudinary.com/drwj4qlnu/image/upload/v1781613988/jem-foot/articles/Echauffement-10-01-2026.jpg',
     categorie: 'Articles Mensuels',
     saison: '2025-2026',
+    publish_at: null,
     publie: true,
     contenu: null,
     created_at: new Date('2026-01-15'),
@@ -36,6 +38,7 @@ const placeholders: Article[] = [
     image_url: 'https://res.cloudinary.com/drwj4qlnu/image/upload/v1781613991/jem-foot/articles/Interview-President-JEM-Couverture-scaled.jpg',
     categorie: 'Interview',
     saison: '2025-2026',
+    publish_at: null,
     publie: true,
     contenu: null,
     created_at: new Date('2026-01-23'),
@@ -49,6 +52,7 @@ const placeholders: Article[] = [
     image_url: 'https://res.cloudinary.com/drwj4qlnu/image/upload/v1781613994/jem-foot/articles/IMG_6327.jpg',
     categorie: 'Articles Mensuels',
     saison: '2025-2026',
+    publish_at: null,
     publie: true,
     contenu: null,
     created_at: new Date('2026-03-04'),
@@ -69,7 +73,7 @@ export default async function NewsSection() {
     articles = await db
       .select()
       .from(schema.articles)
-      .where(eq(schema.articles.publie, true))
+      .where(articleVisibleWhere)
       .orderBy(desc(schema.articles.created_at))
       .limit(3);
   } catch {

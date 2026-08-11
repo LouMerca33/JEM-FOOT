@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { articleVisibleWhere } from '@/lib/article-visibility';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -31,14 +32,14 @@ export default async function ArticlePage({ params }: Props) {
 
   try {
     const [found] = await db.select().from(schema.articles)
-      .where(and(eq(schema.articles.slug, slug), eq(schema.articles.publie, true))).limit(1);
+      .where(and(eq(schema.articles.slug, slug), articleVisibleWhere)).limit(1);
     if (!found) notFound();
     article = found;
 
     if (found.categorie) {
       similaires = await db.select().from(schema.articles)
         .where(and(
-          eq(schema.articles.publie, true),
+          articleVisibleWhere,
           eq(schema.articles.categorie, found.categorie),
           ne(schema.articles.id, found.id),
         )).limit(3);

@@ -13,12 +13,14 @@ CREATE TABLE IF NOT EXISTS articles (
   categorie TEXT CHECK (categorie IN ('Articles Mensuels', 'FAQ', 'Interview')),
   saison TEXT,
   publie BOOLEAN DEFAULT false NOT NULL,
+  publish_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
   updated_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
 );
 
 -- Si la table articles existe déjà (site en prod), exécuter plutôt ceci :
 -- ALTER TABLE articles ADD COLUMN IF NOT EXISTS saison TEXT;
+-- ALTER TABLE articles ADD COLUMN IF NOT EXISTS publish_at TIMESTAMPTZ;
 -- UPDATE articles SET saison = '2026-2027' WHERE saison IS NULL;
 
 CREATE TABLE IF NOT EXISTS equipes (

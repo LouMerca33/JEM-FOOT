@@ -44,8 +44,16 @@ export default async function AdminArticlesPage() {
                   <td className="px-4 py-3 text-xs text-[#8a96b8]">{a.categorie ?? '—'}</td>
                   <td className="px-4 py-3 text-xs text-[#8a96b8]">{a.saison ?? '—'}</td>
                   <td className="px-4 py-3">
-                    <span className={`text-xs px-2 py-0.5 rounded ${a.publie ? 'bg-green-900/40 text-green-400' : 'bg-[rgba(232,213,163,0.1)] text-[#8a96b8]'}`}>
-                      {a.publie ? 'Publié' : 'Brouillon'}
+                    <span className={`text-xs px-2 py-0.5 rounded ${
+                      a.publie && a.publish_at && new Date(a.publish_at) > new Date()
+                        ? 'bg-[rgba(232,213,163,0.15)] text-[#e8d5a3]'
+                        : a.publie
+                        ? 'bg-green-900/40 text-green-400'
+                        : 'bg-[rgba(232,213,163,0.1)] text-[#8a96b8]'
+                    }`}>
+                      {a.publie && a.publish_at && new Date(a.publish_at) > new Date()
+                        ? `Programmé · ${new Date(a.publish_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}`
+                        : a.publie ? 'Publié' : 'Brouillon'}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-xs text-[#8a96b8]">{formatDate(a.created_at)}</td>

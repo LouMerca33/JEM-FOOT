@@ -18,6 +18,13 @@ function slugify(text: string) {
     .replace(/^-+|-+$/g, '');
 }
 
+// Convertit un Date en valeur compatible <input type="datetime-local"> (heure locale, sans secondes/TZ)
+function toLocalInputValue(d: Date | string) {
+  const date = new Date(d);
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
+
 export default function ArticleEditor({ article }: { article: Article | null }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -29,6 +36,7 @@ export default function ArticleEditor({ article }: { article: Article | null }) 
     image_url: article?.image_url ?? '',
     extrait: article?.extrait ?? '',
     contenu: article?.contenu ?? '',
+    publish_at: article?.publish_at ? toLocalInputValue(article.publish_at) : '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -42,10 +50,17 @@ export default function ArticleEditor({ article }: { article: Article | null }) 
 
   const handleSave = (publie: boolean) => {
     startTransition(async () => {
-      await saveArticle({ ...form, publie, ...(article ? { id: article.id } : {}) });
+      await saveArticle({
+        ...form,
+        publie,
+        publish_at: form.publish_at ? new Date(form.publish_at).toISOString() : '',
+        ...(article ? { id: article.id } : {}),
+      });
       router.push('/admin/articles');
     });
   };
+
+  const isScheduled = !!form.publish_at && new Date(form.publish_at) > new Date();
 
   const inputCls = 'w-full bg-[#141d3f] border border-[rgba(232,213,163,0.12)] hover:border-[rgba(232,213,163,0.25)] focus:border-[#e8d5a3] focus:outline-none rounded px-4 py-2.5 text-sm text-[#f8f6f2] placeholder:text-[#8a96b8] transition-colors';
   const labelCls = 'block text-xs font-bold uppercase tracking-widest text-[#e8d5a3] mb-1.5';
@@ -92,10 +107,30 @@ export default function ArticleEditor({ article }: { article: Article | null }) 
           </div>
         </div>
 
+        <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6 space-y-4">
+          <div>
+            <label className={labelCls}>Publication différée (optionnel)</label>
+            <input
+              type="datetime-local"
+              name="publish_at"
+              value={form.publish_at}
+              onChange={handleChange}
+              className={inputCls}
+            />
+            <p className="text-xs text-[#8a96b8] mt-1">
+              {form.publish_at
+                ? isScheduled
+                  ? 'L\u2019article restera invisible sur le site jusqu\u2019à cette date.'
+                  : 'Cette date est passée : l\u2019article sera visible immédiatement.'
+                : 'Vide = visible immédiatement dès publication.'}
+            </p>
+          </div>
+        </div>
+
         <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6 space-y-3">
           <button onClick={() => handleSave(true)} disabled={pending}
             className="w-full bg-[#7a1f3d] hover:bg-[#9c2b4f] disabled:opacity-50 text-[#f8f6f2] font-semibold py-3 rounded text-sm transition-colors">
-            {pending ? 'Sauvegarde...' : 'Publier'}
+            {pending ? 'Sauvegarde...' : isScheduled ? `Programmer pour le ${new Date(form.publish_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })}` : 'Publier'}
           </button>
           <button onClick={() => handleSave(false)} disabled={pending}
             className="w-full bg-[#2a3d6e] hover:bg-[#1e2c56] disabled:opacity-50 text-[#f8f6f2] font-semibold py-3 rounded text-sm transition-colors border border-[rgba(232,213,163,0.1)]">
