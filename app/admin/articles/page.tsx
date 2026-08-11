@@ -22,11 +22,11 @@ export default async function AdminArticlesPage() {
           + Nouvel article
         </Link>
       </div>
-      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] overflow-hidden">
+      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] overflow-x-auto">
         {articles.length === 0 ? (
           <p className="p-8 text-sm text-[#8a96b8] text-center">Aucun article.</p>
         ) : (
-          <table className="w-full">
+          <table className="w-full min-w-[720px]">
             <thead>
               <tr className="border-b border-[rgba(232,213,163,0.08)]">
                 {['Titre', 'Catégorie', 'Saison', 'Statut', 'Date', 'Actions'].map((h) => (

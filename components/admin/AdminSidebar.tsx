@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
@@ -15,9 +16,35 @@ const navItems = [
   { href: '/admin/temoignages', label: 'Témoignages', icon: '❝' },
 ];
 
+function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
+  return (
+    <ul className="space-y-1">
+      {navItems.map(({ href, label, icon }) => {
+        const active = href === '/admin' ? pathname === '/admin' : pathname.startsWith(href);
+        return (
+          <li key={href}>
+            <Link
+              href={href}
+              onClick={onNavigate}
+              className={`flex items-center gap-3 px-3 py-2.5 rounded text-sm transition-colors ${
+                active
+                  ? 'bg-[rgba(122,31,61,0.3)] text-[#f8f6f2] border border-[rgba(122,31,61,0.4)]'
+                  : 'text-[#8a96b8] hover:text-[#f8f6f2] hover:bg-[rgba(255,255,255,0.04)]'
+              }`}
+            >
+              <span className="text-base">{icon}</span>{label}
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
 export default function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });
@@ -26,49 +53,70 @@ export default function AdminSidebar() {
   };
 
   return (
-    <aside className="w-56 flex-shrink-0 bg-[#141d3f] border-r border-[rgba(232,213,163,0.08)] flex flex-col min-h-screen sticky top-0">
-      <div className="p-6 border-b border-[rgba(232,213,163,0.08)]">
+    <>
+      {/* Barre mobile (< md) */}
+      <div className="md:hidden sticky top-0 z-40 bg-[#141d3f] border-b border-[rgba(232,213,163,0.08)] flex items-center justify-between px-4 py-3">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full border border-[#e8d5a3] flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full border border-[#e8d5a3] flex items-center justify-center flex-shrink-0">
             <span className="font-[family-name:var(--font-bebas)] text-sm tracking-[0.08em] text-[#e8d5a3]">JEM</span>
           </div>
           <span className="text-xs font-bold uppercase tracking-widest text-[#8a96b8]">Admin</span>
         </Link>
-      </div>
-
-      <nav className="flex-1 p-4">
-        <ul className="space-y-1">
-          {navItems.map(({ href, label, icon }) => {
-            const active = href === '/admin' ? pathname === '/admin' : pathname.startsWith(href);
-            return (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded text-sm transition-colors ${
-                    active
-                      ? 'bg-[rgba(122,31,61,0.3)] text-[#f8f6f2] border border-[rgba(122,31,61,0.4)]'
-                      : 'text-[#8a96b8] hover:text-[#f8f6f2] hover:bg-[rgba(255,255,255,0.04)]'
-                  }`}
-                >
-                  <span className="text-base">{icon}</span>{label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-
-      <div className="p-4 border-t border-[rgba(232,213,163,0.08)]">
         <button
-          onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded text-sm text-[#8a96b8] hover:text-[#f8f6f2] hover:bg-[rgba(255,255,255,0.04)] transition-colors"
+          onClick={() => setMobileOpen((v) => !v)}
+          className="p-2 text-[#f8f6f2]"
+          aria-label="Menu"
+          aria-expanded={mobileOpen}
         >
-          <span>⊗</span>Déconnexion
+          {mobileOpen ? '✕' : '☰'}
         </button>
-        <Link href="/" className="mt-1 w-full flex items-center gap-3 px-3 py-2.5 rounded text-sm text-[#8a96b8] hover:text-[#e8d5a3] transition-colors">
-          <span>↗</span>Voir le site
-        </Link>
       </div>
-    </aside>
+
+      {/* Panneau mobile déroulant */}
+      {mobileOpen && (
+        <div className="md:hidden sticky top-[57px] z-30 bg-[#141d3f] border-b border-[rgba(232,213,163,0.08)] px-4 py-4 max-h-[70vh] overflow-y-auto">
+          <NavLinks pathname={pathname} onNavigate={() => setMobileOpen(false)} />
+          <div className="mt-4 pt-4 border-t border-[rgba(232,213,163,0.08)] space-y-1">
+            <button
+              onClick={handleLogout}
+              className="w-full flex items-center gap-3 px-3 py-2.5 rounded text-sm text-[#8a96b8] hover:text-[#f8f6f2] hover:bg-[rgba(255,255,255,0.04)] transition-colors"
+            >
+              <span>⊗</span>Déconnexion
+            </button>
+            <Link href="/" className="w-full flex items-center gap-3 px-3 py-2.5 rounded text-sm text-[#8a96b8] hover:text-[#e8d5a3] transition-colors">
+              <span>↗</span>Voir le site
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {/* Sidebar fixe (>= md) */}
+      <aside className="hidden md:flex w-56 flex-shrink-0 bg-[#141d3f] border-r border-[rgba(232,213,163,0.08)] flex-col min-h-screen sticky top-0">
+        <div className="p-6 border-b border-[rgba(232,213,163,0.08)]">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full border border-[#e8d5a3] flex items-center justify-center">
+              <span className="font-[family-name:var(--font-bebas)] text-sm tracking-[0.08em] text-[#e8d5a3]">JEM</span>
+            </div>
+            <span className="text-xs font-bold uppercase tracking-widest text-[#8a96b8]">Admin</span>
+          </Link>
+        </div>
+
+        <nav className="flex-1 p-4">
+          <NavLinks pathname={pathname} />
+        </nav>
+
+        <div className="p-4 border-t border-[rgba(232,213,163,0.08)]">
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded text-sm text-[#8a96b8] hover:text-[#f8f6f2] hover:bg-[rgba(255,255,255,0.04)] transition-colors"
+          >
+            <span>⊗</span>Déconnexion
+          </button>
+          <Link href="/" className="mt-1 w-full flex items-center gap-3 px-3 py-2.5 rounded text-sm text-[#8a96b8] hover:text-[#e8d5a3] transition-colors">
+            <span>↗</span>Voir le site
+          </Link>
+        </div>
+      </aside>
+    </>
   );
 }

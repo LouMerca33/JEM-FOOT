@@ -57,8 +57,8 @@ export default function TemoignagesAdmin({ temoignages }: { temoignages: Temoign
         )}
       </div>
 
-      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] overflow-hidden">
-        <table className="w-full">
+      <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] overflow-x-auto">
+        <table className="w-full min-w-[560px]">
           <thead>
             <tr className="border-b border-[rgba(232,213,163,0.08)]">
               {['Parent', 'Catégorie', 'Message', 'Statut', 'Actions'].map((h) => (
