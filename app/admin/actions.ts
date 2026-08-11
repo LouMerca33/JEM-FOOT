@@ -137,6 +137,38 @@ export async function updateEquipe(id: string, data: {
   revalidatePath('/');
 }
 
+export async function createEquipe(data: {
+  categorie: string;
+  tranche_age: string;
+  coach: string;
+  description: string;
+  horaires: string;
+  effectif: number | null;
+  image_url: string;
+  ordre: number;
+}) {
+  await db.insert(schema.equipes).values({
+    categorie: data.categorie,
+    tranche_age: data.tranche_age || null,
+    coach: data.coach || null,
+    description: data.description || null,
+    horaires: data.horaires || null,
+    effectif: data.effectif,
+    image_url: data.image_url || null,
+    ordre: data.ordre,
+  });
+  revalidatePath('/admin/equipes');
+  revalidatePath('/nos-equipes');
+  revalidatePath('/');
+}
+
+export async function deleteEquipe(id: string) {
+  await db.delete(schema.equipes).where(eq(schema.equipes.id, id));
+  revalidatePath('/admin/equipes');
+  revalidatePath('/nos-equipes');
+  revalidatePath('/');
+}
+
 // ── Partenaires ───────────────────────────────────────────────────────────────
 
 export async function addPartenaire(data: {
