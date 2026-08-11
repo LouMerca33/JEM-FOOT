@@ -90,6 +90,19 @@ CREATE TABLE IF NOT EXISTS temoignages (
   created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS site_settings (
+  key TEXT PRIMARY KEY,
+  value TEXT NOT NULL
+);
+
+INSERT INTO site_settings (key, value) VALUES
+  ('stat1_value', '120+'), ('stat1_label', 'Licenciés cette saison'),
+  ('stat2_value', 'U7–U13'), ('stat2_label', 'Toutes catégories'),
+  ('stat3_value', '2022'), ('stat3_label', 'Fondation du club'),
+  ('stat4_value', '15+'), ('stat4_label', 'Éducateurs formés FFF'),
+  ('hero_tagline', 'Respect · Plaisir · Engagement · Collectif')
+ON CONFLICT DO NOTHING;
+
 -- Seed équipes
 INSERT INTO equipes (categorie, tranche_age, horaires, effectif, ordre) VALUES
   ('U7/U8',   '5–7 ans',   'Lundi 17h45–19h30 / Mercredi 14h15–16h00', 20, 1),

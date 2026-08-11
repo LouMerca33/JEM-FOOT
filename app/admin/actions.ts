@@ -288,3 +288,16 @@ export async function deleteTemoignage(id: string) {
   revalidatePath('/admin/temoignages');
   revalidatePath('/');
 }
+
+// ── Réglages page d'accueil ─────────────────────────────────────────────────
+
+export async function saveSettings(data: Record<string, string>) {
+  for (const [key, value] of Object.entries(data)) {
+    await db
+      .insert(schema.siteSettings)
+      .values({ key, value })
+      .onConflictDoUpdate({ target: schema.siteSettings.key, set: { value } });
+  }
+  revalidatePath('/admin/accueil');
+  revalidatePath('/');
+}

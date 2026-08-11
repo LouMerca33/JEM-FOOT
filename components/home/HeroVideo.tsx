@@ -5,7 +5,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SAISON_LABEL } from '@/lib/season';
 
-export default function HeroVideo() {
+interface Props {
+  tagline: string;
+}
+
+export default function HeroVideo({ tagline }: Props) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video background */}
@@ -90,7 +94,7 @@ export default function HeroVideo() {
           transition={{ duration: 0.7, delay: 0.65 }}
           className="text-base sm:text-lg text-[#8a96b8] mb-10 max-w-xl mx-auto"
         >
-          Respect · Plaisir · Engagement · Collectif
+          {tagline}
         </motion.p>
 
         {/* CTAs */}

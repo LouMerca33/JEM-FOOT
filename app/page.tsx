@@ -7,11 +7,14 @@ import SondageSection from '@/components/home/SondageSection';
 import ValuesSection from '@/components/home/ValuesSection';
 import StadeSection from '@/components/home/StadeSection';
 import CtaSection from '@/components/home/CtaSection';
+import { getSettings } from '@/lib/settings';
 
-export default function HomePage() {
+export default async function HomePage() {
+  const settings = await getSettings();
+
   return (
     <>
-      <HeroVideo />
+      <HeroVideo tagline={settings.hero_tagline} />
       <StatsBar />
       <NewsSection />
       <TeamsSection />

@@ -1,14 +1,16 @@
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import AnimatedCounter from '@/components/ui/AnimatedCounter';
+import { getSettings } from '@/lib/settings';
 
-const stats = [
-  { value: '120+', label: 'Licenciés cette saison' },
-  { value: 'U7–U13', label: 'Toutes catégories' },
-  { value: '2022', label: 'Fondation du club' },
-  { value: '15+', label: 'Éducateurs formés FFF' },
-];
+export default async function StatsBar() {
+  const s = await getSettings();
+  const stats = [
+    { value: s.stat1_value, label: s.stat1_label },
+    { value: s.stat2_value, label: s.stat2_label },
+    { value: s.stat3_value, label: s.stat3_label },
+    { value: s.stat4_value, label: s.stat4_label },
+  ];
 
-export default function StatsBar() {
   return (
     <section className="bg-[#7a1f3d] py-10 relative overflow-hidden">
       {/* Jersey stripe overlay */}
