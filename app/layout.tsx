@@ -3,6 +3,10 @@ import { Bebas_Neue, Barlow } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import NewArticleToast from "@/components/layout/NewArticleToast";
+import { db, schema } from "@/lib/db";
+import { desc } from "drizzle-orm";
+import { articleVisibleWhere } from "@/lib/article-visibility";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -25,11 +29,24 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let latest: { slug: string; titre: string } | null = null;
+  try {
+    const [found] = await db
+      .select({ slug: schema.articles.slug, titre: schema.articles.titre })
+      .from(schema.articles)
+      .where(articleVisibleWhere)
+      .orderBy(desc(schema.articles.created_at))
+      .limit(1);
+    latest = found ?? null;
+  } catch {
+    // Table absente ou DB inaccessible : pas de toast, on n'affiche rien.
+  }
+
   return (
     <html
       lang="fr"
@@ -40,6 +57,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <NewArticleToast latest={latest} />
       </body>
     </html>
   );
