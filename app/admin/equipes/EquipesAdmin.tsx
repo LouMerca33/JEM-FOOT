@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from 'react';
 import type { Equipe } from '@/lib/types';
-import { updateEquipe, createEquipe, deleteEquipe } from '../actions';
+import { updateEquipe, createEquipe, deleteEquipe, moveEquipe } from '../actions';
 
 const emptyNewEquipe = {
   categorie: '',
@@ -18,6 +18,7 @@ export default function EquipesAdmin({ equipes }: { equipes: Equipe[] }) {
   const [pending, startTransition] = useTransition();
   const [savingId, setSavingId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [movingId, setMovingId] = useState<string | null>(null);
   const [creating, setCreating] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [newEquipe, setNewEquipe] = useState(emptyNewEquipe);
@@ -51,6 +52,14 @@ export default function EquipesAdmin({ equipes }: { equipes: Equipe[] }) {
     startTransition(async () => {
       await deleteEquipe(id);
       setDeletingId(null);
+    });
+  };
+
+  const handleMove = (id: string, direction: 'up' | 'down') => {
+    setMovingId(id);
+    startTransition(async () => {
+      await moveEquipe(id, direction);
+      setMovingId(null);
     });
   };
 
@@ -131,12 +140,32 @@ export default function EquipesAdmin({ equipes }: { equipes: Equipe[] }) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {equipes.map((equipe) => {
+        {equipes.map((equipe, index) => {
           const f = forms[equipe.id] ?? equipe;
           return (
             <div key={equipe.id} className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-[family-name:var(--font-bebas)] text-2xl text-[#f8f6f2]">{equipe.categorie}</h2>
+                <div className="flex items-center gap-2">
+                  <div className="flex flex-col">
+                    <button
+                      onClick={() => handleMove(equipe.id, 'up')}
+                      disabled={index === 0 || (pending && movingId === equipe.id)}
+                      title="Monter"
+                      className="text-[#8a96b8] hover:text-[#e8d5a3] disabled:opacity-20 disabled:hover:text-[#8a96b8] leading-none transition-colors"
+                    >
+                      ▲
+                    </button>
+                    <button
+                      onClick={() => handleMove(equipe.id, 'down')}
+                      disabled={index === equipes.length - 1 || (pending && movingId === equipe.id)}
+                      title="Descendre"
+                      className="text-[#8a96b8] hover:text-[#e8d5a3] disabled:opacity-20 disabled:hover:text-[#8a96b8] leading-none transition-colors"
+                    >
+                      ▼
+                    </button>
+                  </div>
+                  <h2 className="font-[family-name:var(--font-bebas)] text-2xl text-[#f8f6f2]">{equipe.categorie}</h2>
+                </div>
                 <button
                   onClick={() => handleDelete(equipe.id, equipe.categorie)}
                   disabled={pending && deletingId === equipe.id}

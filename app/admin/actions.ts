@@ -1,7 +1,7 @@
 'use server';
 
 import { db, schema } from '@/lib/db';
-import { eq } from 'drizzle-orm';
+import { asc, eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import type { ArticleCategorie, GalerieCategorie, PartenaireNiveau } from '@/lib/types';
 
@@ -168,6 +168,25 @@ export async function createEquipe(data: {
 
 export async function deleteEquipe(id: string) {
   await db.delete(schema.equipes).where(eq(schema.equipes.id, id));
+  revalidatePath('/admin/equipes');
+  revalidatePath('/nos-equipes');
+  revalidatePath('/');
+}
+
+export async function moveEquipe(id: string, direction: 'up' | 'down') {
+  const all = await db.select().from(schema.equipes).orderBy(asc(schema.equipes.ordre));
+  const idx = all.findIndex((e) => e.id === id);
+  if (idx === -1) return;
+
+  const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
+  if (swapIdx < 0 || swapIdx >= all.length) return;
+
+  const current = all[idx];
+  const neighbor = all[swapIdx];
+
+  await db.update(schema.equipes).set({ ordre: neighbor.ordre }).where(eq(schema.equipes.id, current.id));
+  await db.update(schema.equipes).set({ ordre: current.ordre }).where(eq(schema.equipes.id, neighbor.id));
+
   revalidatePath('/admin/equipes');
   revalidatePath('/nos-equipes');
   revalidatePath('/');
