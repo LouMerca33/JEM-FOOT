@@ -21,7 +21,7 @@ const barlow = Barlow({
 export const metadata: Metadata = {
   title: "Jeunes Espoirs Mérignacais — Club de Football",
   description:
-    "Club de football J.E.M basé à Mérignac (33700). Catégories U7 à U13. Rejoignez-nous !",
+    "Club de football J.E.M basé à Mérignac (33700). Catégories U7 à U14. Rejoignez-nous !",
   manifest: "/manifest.json",
 };
 

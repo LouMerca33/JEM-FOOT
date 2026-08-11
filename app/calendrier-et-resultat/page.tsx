@@ -4,7 +4,7 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export const metadata: Metadata = {
   title: 'Calendrier & Résultats — J.E.M Mérignac',
-  description: 'Calendrier des matchs et résultats des Jeunes Espoirs Mérignacais, toutes catégories U7 à U13.',
+  description: 'Calendrier des matchs et résultats des Jeunes Espoirs Mérignacais, toutes catégories U7 à U14.',
 };
 
 const categories = ['U7', 'U8', 'U9', 'U10', 'U11', 'U12', 'U13'];

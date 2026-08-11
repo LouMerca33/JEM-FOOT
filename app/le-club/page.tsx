@@ -71,7 +71,7 @@ export default async function LeClubPage() {
               </h2>
               <blockquote className="border-l-2 border-[#e8d5a3] pl-6 text-[#8a96b8] leading-relaxed italic space-y-4">
                 <p>
-                  &ldquo;Bienvenue au Jeunes Espoirs Mérignacais. Depuis la création du club, notre ambition est restée la même&nbsp;: offrir aux jeunes de Mérignac un cadre structuré et bienveillant où ils peuvent pratiquer le football dans les meilleures conditions. Chaque joueur – des U7 aux U13 – grandit et s&apos;améliore en apprenant à dépasser leurs limites.
+                  &ldquo;Bienvenue au Jeunes Espoirs Mérignacais. Depuis la création du club, notre ambition est restée la même&nbsp;: offrir aux jeunes de Mérignac un cadre structuré et bienveillant où ils peuvent pratiquer le football dans les meilleures conditions. Chaque joueur – des U7 aux U14 – grandit et s&apos;améliore en apprenant à dépasser leurs limites.
                 </p>
                 <p>
                   Nous nous appuyons sur des valeurs essentielles&nbsp;: le respect, le plaisir, l&apos;engagement et le collectif. Notre priorité est de faire de chaque entraînement un moment de progrès et d&apos;épanouissement pour nos joueurs.

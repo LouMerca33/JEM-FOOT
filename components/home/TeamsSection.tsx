@@ -39,7 +39,7 @@ export default function TeamsSection() {
           <SectionEyebrow label="Nos équipes" />
           <div className="flex items-end justify-between mb-12">
             <h2 className="font-[family-name:var(--font-bebas)] text-5xl sm:text-6xl tracking-[0.04em] text-[#f8f6f2]">
-              Catégories U7 à U13
+              Catégories U7 à U14
             </h2>
             <Link
               href="/nos-equipes"

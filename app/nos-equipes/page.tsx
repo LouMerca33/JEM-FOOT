@@ -8,7 +8,7 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export const metadata: Metadata = {
   title: 'Nos Équipes — J.E.M Mérignac',
-  description: 'Découvrez les catégories U7 à U13 des Jeunes Espoirs Mérignacais.',
+  description: 'Découvrez les catégories U7 à U14 des Jeunes Espoirs Mérignacais.',
 };
 
 export default async function NosEquipesPage() {
