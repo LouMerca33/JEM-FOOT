@@ -2,6 +2,7 @@
 
 import { db, schema } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
+import { notifyNewContactMessage } from '@/lib/email';
 
 export async function sendContactMessage(data: {
   nom: string;
@@ -23,6 +24,15 @@ export async function sendContactMessage(data: {
   } catch {
     return { success: false, error: "Une erreur est survenue, réessayez ou appelez-nous directement." };
   }
+
+  // Best-effort : le message est déjà en base à ce stade, donc même si la
+  // notification échoue, rien n'est perdu — il reste visible dans l'admin.
+  await notifyNewContactMessage({
+    nom: data.nom.trim(),
+    email: data.email.trim(),
+    objet: data.objet || null,
+    message: data.message.trim(),
+  });
 
   revalidatePath('/admin/messages');
   return { success: true };
