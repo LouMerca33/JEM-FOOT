@@ -337,3 +337,15 @@ export async function deleteResultat(id: string) {
   revalidatePath('/calendrier-et-resultat');
   revalidatePath('/');
 }
+
+// ── Messages de contact ─────────────────────────────────────────────────────
+
+export async function markMessageRead(id: string, lu: boolean) {
+  await db.update(schema.contactMessages).set({ lu: !lu }).where(eq(schema.contactMessages.id, id));
+  revalidatePath('/admin/messages');
+}
+
+export async function deleteMessage(id: string) {
+  await db.delete(schema.contactMessages).where(eq(schema.contactMessages.id, id));
+  revalidatePath('/admin/messages');
+}

@@ -115,6 +115,16 @@ export const siteSettings = pgTable('site_settings', {
   value: text('value').notNull(),
 });
 
+export const contactMessages = pgTable('contact_messages', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  nom: text('nom').notNull(),
+  email: text('email').notNull(),
+  objet: text('objet'),
+  message: text('message').notNull(),
+  lu: boolean('lu').default(false).notNull(),
+  created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+
 export type Article = typeof articles.$inferSelect;
 export type NewArticle = typeof articles.$inferInsert;
 export type Equipe = typeof equipes.$inferSelect;
@@ -134,3 +144,4 @@ export type SondageVote = typeof sondageVotes.$inferSelect;
 export type Temoignage = typeof temoignages.$inferSelect;
 export type NewTemoignage = typeof temoignages.$inferInsert;
 export type SiteSetting = typeof siteSettings.$inferSelect;
+export type ContactMessage = typeof contactMessages.$inferSelect;

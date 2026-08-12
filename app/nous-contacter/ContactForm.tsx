@@ -1,30 +1,38 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
+import { sendContactMessage } from '@/app/actions/contact';
 
 const objets = ['Inscription', 'Question', 'Partenariat', 'Autre'];
 
 export default function ContactForm() {
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [pending, startTransition] = useTransition();
+  const [status, setStatus] = useState<'idle' | 'sent' | 'error'>('idle');
+  const [error, setError] = useState('');
   const [form, setForm] = useState({ nom: '', email: '', objet: 'Inscription', message: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('sending');
-    // mailto fallback — replace with API route when backend is set up
-    const mailtoLink = `mailto:secretariat.jem@gmail.com?subject=${encodeURIComponent(`[${form.objet}] ${form.nom}`)}&body=${encodeURIComponent(`Nom: ${form.nom}\nEmail: ${form.email}\n\n${form.message}`)}`;
-    window.location.href = mailtoLink;
-    setStatus('sent');
+    setError('');
+    startTransition(async () => {
+      const res = await sendContactMessage(form);
+      if (res.success) {
+        setStatus('sent');
+      } else {
+        setStatus('error');
+        setError(res.error ?? 'Une erreur est survenue.');
+      }
+    });
   };
 
   const inputCls = 'w-full bg-[#141d3f] border border-[rgba(232,213,163,0.12)] hover:border-[rgba(232,213,163,0.25)] focus:border-[#e8d5a3] focus:outline-none rounded px-4 py-3 text-sm text-[#f8f6f2] placeholder:text-[#8a96b8] transition-colors';
 
   return (
-    <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-[10px] p-6 sm:p-8">
+    <div className="bg-[#1e2c56] border border-[rgba(232,213,163,0.08)] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.18)] p-6 sm:p-8">
       <h2 className="font-[family-name:var(--font-bebas)] text-3xl text-[#f8f6f2] mb-6">
         Envoyer un message
       </h2>
@@ -34,7 +42,7 @@ export default function ContactForm() {
           <p className="text-[#e8d5a3] font-semibold mb-2">Message envoyé !</p>
           <p className="text-sm text-[#8a96b8]">Nous vous répondrons dans les meilleurs délais.</p>
           <button
-            onClick={() => setStatus('idle')}
+            onClick={() => { setStatus('idle'); setForm({ nom: '', email: '', objet: 'Inscription', message: '' }); }}
             className="mt-6 text-sm text-[#e8d5a3] hover:text-[#f2e8c6]"
           >
             Envoyer un autre message
@@ -73,12 +81,14 @@ export default function ContactForm() {
             />
           </div>
 
+          {status === 'error' && <p className="text-xs text-red-400">{error}</p>}
+
           <button
             type="submit"
-            disabled={status === 'sending'}
+            disabled={pending}
             className="w-full bg-[#7a1f3d] hover:bg-[#9c2b4f] disabled:opacity-50 text-[#f8f6f2] font-semibold py-3.5 rounded text-sm transition-colors"
           >
-            {status === 'sending' ? 'Envoi...' : 'Envoyer le message'}
+            {pending ? 'Envoi...' : 'Envoyer le message'}
           </button>
         </form>
       )}

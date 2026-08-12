@@ -110,6 +110,16 @@ INSERT INTO site_settings (key, value) VALUES
   ('hero_tagline', 'Respect · Plaisir · Engagement · Collectif')
 ON CONFLICT DO NOTHING;
 
+CREATE TABLE IF NOT EXISTS contact_messages (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  nom TEXT NOT NULL,
+  email TEXT NOT NULL,
+  objet TEXT,
+  message TEXT NOT NULL,
+  lu BOOLEAN DEFAULT false NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
+);
+
 -- Seed équipes
 INSERT INTO equipes (categorie, tranche_age, horaires, effectif, ordre) VALUES
   ('U7/U8',   '5–7 ans',   'Lundi 17h45–19h30 / Mercredi 14h15–16h00', 20, 1),

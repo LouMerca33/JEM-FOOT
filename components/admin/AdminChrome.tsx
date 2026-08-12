@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 
-export default function AdminChrome({ children }: { children: React.ReactNode }) {
+export default function AdminChrome({ children, unreadCount = 0 }: { children: React.ReactNode; unreadCount?: number }) {
   const pathname = usePathname();
 
   // Pas de sidebar admin sur l'écran de connexion : ni utile avant d'être
@@ -14,7 +14,7 @@ export default function AdminChrome({ children }: { children: React.ReactNode })
 
   return (
     <div className="min-h-screen bg-[#0d1429] flex flex-col md:flex-row">
-      <AdminSidebar />
+      <AdminSidebar unreadCount={unreadCount} />
       <main className="flex-1 min-w-0 p-4 sm:p-6 lg:p-8">{children}</main>
     </div>
   );

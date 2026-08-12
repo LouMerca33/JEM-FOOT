@@ -18,6 +18,7 @@ export type {
   SondageVote,
   Temoignage,
   NewTemoignage,
+  ContactMessage,
 } from './schema';
 
 // Helpers de catégories (validation côté UI)

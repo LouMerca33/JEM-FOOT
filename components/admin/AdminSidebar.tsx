@@ -7,6 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: '⊞' },
   { href: '/admin/accueil', label: 'Accueil', icon: '⌂' },
+  { href: '/admin/messages', label: 'Messages', icon: '✉' },
   { href: '/admin/articles', label: 'Articles', icon: '✎' },
   { href: '/admin/galerie', label: 'Galerie', icon: '⊡' },
   { href: '/admin/equipes', label: 'Équipes', icon: '⊛' },
@@ -17,7 +18,7 @@ const navItems = [
   { href: '/admin/temoignages', label: 'Témoignages', icon: '❝' },
 ];
 
-function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
+function NavLinks({ pathname, unreadCount, onNavigate }: { pathname: string; unreadCount: number; onNavigate?: () => void }) {
   return (
     <ul className="space-y-1">
       {navItems.map(({ href, label, icon }) => {
@@ -42,6 +43,11 @@ function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () 
                 {icon}
               </span>
               {label}
+              {href === '/admin/messages' && unreadCount > 0 && (
+                <span className="ml-auto flex-shrink-0 min-w-[18px] h-[18px] px-1 rounded-full bg-[#7a1f3d] text-[10px] font-bold text-[#f8f6f2] flex items-center justify-center">
+                  {unreadCount}
+                </span>
+              )}
             </Link>
           </li>
         );
@@ -50,7 +56,7 @@ function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () 
   );
 }
 
-export default function AdminSidebar() {
+export default function AdminSidebar({ unreadCount = 0 }: { unreadCount?: number }) {
   const pathname = usePathname();
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -84,7 +90,7 @@ export default function AdminSidebar() {
       {/* Panneau mobile déroulant */}
       {mobileOpen && (
         <div className="md:hidden sticky top-[57px] z-30 bg-[#141d3f] border-b border-[rgba(232,213,163,0.08)] px-4 py-4 max-h-[70vh] overflow-y-auto">
-          <NavLinks pathname={pathname} onNavigate={() => setMobileOpen(false)} />
+          <NavLinks pathname={pathname} unreadCount={unreadCount} onNavigate={() => setMobileOpen(false)} />
           <div className="mt-4 pt-4 border-t border-[rgba(232,213,163,0.08)] space-y-1">
             <button
               onClick={handleLogout}
@@ -111,7 +117,7 @@ export default function AdminSidebar() {
         </div>
 
         <nav className="flex-1 p-4 overflow-y-auto">
-          <NavLinks pathname={pathname} />
+          <NavLinks pathname={pathname} unreadCount={unreadCount} />
         </nav>
 
         <div className="p-4 border-t border-[rgba(232,213,163,0.08)] space-y-1">
